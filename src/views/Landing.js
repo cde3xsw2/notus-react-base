@@ -357,7 +357,7 @@ const FeaturesInfo = <div className="container mx-auto px-4">
           >
             <polygon
               points="-30,95 583,95 583,65"
-              className="text-sky-700 fill-current"
+              className="text-slate-700  fill-current"
             ></polygon>
           </svg>
           <h4 className="text-xl font-bold text-white">
