@@ -218,27 +218,27 @@ const TeamComponent = <div className="container mx-auto px-4">
     <TeamMember 
       name={Messages.teamMemberName1}  
       job={Messages.teamMemberJob1} 
-      image={require("assets/img/team-1-800x800.jpg").default}
+      image={"/img/team-1-800x800.jpg"}
       dribbleUrl='true' 
       facebookUrl='true' 
       twitterUrl='true'/>
     <TeamMember 
       name={Messages.teamMemberName2}  
       job={Messages.teamMemberJob2} 
-      image={require("assets/img/team-2-800x800.jpg").default}
+      image={"/img/team-2-800x800.jpg"}
       googleUrl='true' 
       facebookUrl='true'/>
     <TeamMember 
       name={Messages.teamMemberName3}  
       job={Messages.teamMemberJob3} 
-      image={require("assets/img/team-3-800x800.jpg").default}
+      image={"/img/team-3-800x800.jpg"}
       googleUrl='true' 
       instagramUrl='true' 
       twitterUrl='true'/>
     <TeamMember 
       name={Messages.teamMemberName4}  
       job={Messages.teamMemberJob4} 
-      image={require("assets/img/team-4-470x470.png").default}
+      image={"/img/team-4-470x470.png"}
       googleUrl='true' 
       dribbleUrl='true' 
       instagramUrl='true' 

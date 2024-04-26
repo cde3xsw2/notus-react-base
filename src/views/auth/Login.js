@@ -17,7 +17,7 @@ const GoogleIcon = <button
   <img
     alt="..."
     className="w-5 mr-1"
-    src={require("assets/img/google.svg").default} />
+    src={"/img/google.svg"} />
   Google
 </button>;
 const GithubIcon = <button
@@ -27,7 +27,7 @@ const GithubIcon = <button
   <img
     alt="..."
     className="w-5 mr-1"
-    src={require("assets/img/github.svg").default} />
+    src={"/img/github.svg"} />
   Github
 </button>;
 
