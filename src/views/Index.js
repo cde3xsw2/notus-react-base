@@ -92,7 +92,7 @@ export default function Index() {
     <>
       <IndexNavbar fixed />
       <section className="header relative pt-16 items-center flex h-screen max-h-860-px">
-        {Section1()}
+        {HeaderSection()}
       </section>
 
       <section className="mt-48 md:mt-40 pb-40 relative bg-blueGray-100">
@@ -685,7 +685,7 @@ function Section2() {
   </>;
 }
 
-function Section1() {
+function HeaderSection() {
   return <>
     <div className="container mx-auto items-center flex flex-wrap">
       <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
