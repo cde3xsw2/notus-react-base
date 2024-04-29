@@ -1244,21 +1244,7 @@ function newFunction_1() {
         </select>
       </div>
       <div>
-        <label
-          for="item-weight"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          Item Weight (kg)
-        </label>
-        <input
-          type="number"
-          name="item-weight"
-          id="item-weight"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-          value="12"
-          placeholder="Ex. 12"
-          required=""
-        />
+      <InputField type="number" fieldName="item-weight" placeholder="Ex. 12" value="12"/>
       </div>
       <div>
         <label
@@ -1267,15 +1253,7 @@ function newFunction_1() {
         >
           Length (cm)
         </label>
-        <input
-          type="number"
-          name="length"
-          id="lenght"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-          value="105"
-          placeholder="Ex. 105"
-          required=""
-        />
+        <InputField type="lenght" fieldName="lenght" placeholder="Ex. 105" value="105"/>
       </div>
       <div>
         <label
@@ -1284,15 +1262,7 @@ function newFunction_1() {
         >
           Breadth (cm)
         </label>
-        <input
-          type="number"
-          name="breadth"
-          id="breadth"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-          value="15"
-          placeholder="Ex. 15"
-          required=""
-        />
+        <InputField type="number" fieldName="breadth" placeholder="Ex. 15" value="15"/>
       </div>
       <div>
         <label
@@ -1301,15 +1271,7 @@ function newFunction_1() {
         >
           Width (cm)
         </label>
-        <input
-          type="number"
-          name="width"
-          id="width"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-          value="23"
-          placeholder="Ex. 23"
-          required=""
-        />
+        <InputField type="number" fieldName="width" placeholder="Ex. 23" value="23"/>
       </div>
     </div>
   );
@@ -1587,15 +1549,7 @@ function UpdateProduct({ editing, closeFn }) {
               >
                 Product Name
               </label>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                value="Apple iMac 27&ldquo;"
-                placeholder="Type product name"
-                required=""
-              />
+              <InputField fieldName="name" placeholder="Type product name"/>
             </div>
             <div>
               <label
@@ -2035,14 +1989,7 @@ function CreateProduct({ creating, closeFn }) {
                 >
                   Product Name
                 </label>
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Type product name"
-                  required=""
-                />
+                <InputField fieldName="name" placeholder="Type product name"/>
               </div>
               <div>
                 <label
@@ -2069,14 +2016,7 @@ function CreateProduct({ creating, closeFn }) {
                 >
                   Brand
                 </label>
-                <input
-                  type="text"
-                  name="brand"
-                  id="brand"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Product brand"
-                  required=""
-                />
+                <InputField fieldName="brand" placeholder="Product brand"/>
               </div>
               <div>
                 <label
@@ -2085,14 +2025,7 @@ function CreateProduct({ creating, closeFn }) {
                 >
                   Price
                 </label>
-                <input
-                  type="number"
-                  name="price"
-                  id="price"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="$2999"
-                  required=""
-                />
+                <InputField type="number" fieldName="price" placeholder="$2999"/>
               </div>
               <div class="grid gap-4 sm:col-span-2 md:gap-6 sm:grid-cols-4">
                 <div>
@@ -2102,14 +2035,7 @@ function CreateProduct({ creating, closeFn }) {
                   >
                     Item weight (kg)
                   </label>
-                  <input
-                    type="number"
-                    name="weight"
-                    id="weight"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="12"
-                    required=""
-                  />
+                  <InputField type="number" fieldName="weight" placeholder="12"/>
                 </div>
                 <div>
                   <label
@@ -2118,14 +2044,7 @@ function CreateProduct({ creating, closeFn }) {
                   >
                     Lenght (cm)
                   </label>
-                  <input
-                    type="number"
-                    name="length"
-                    id="length"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="105"
-                    required=""
-                  />
+                  <InputField type="number" fieldName="length" placeholder="105"/>
                 </div>
                 <div>
                   <label
@@ -2134,14 +2053,7 @@ function CreateProduct({ creating, closeFn }) {
                   >
                     Breadth (cm)
                   </label>
-                  <input
-                    type="number"
-                    name="breadth"
-                    id="breadth"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="15"
-                    required=""
-                  />
+                  <InputField type="number" fieldName="breadth" placeholder="15"/>
                 </div>
                 <div>
                   <label
@@ -2150,14 +2062,7 @@ function CreateProduct({ creating, closeFn }) {
                   >
                     Width (cm)
                   </label>
-                  <input
-                    type="number"
-                    name="width"
-                    id="width"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="23"
-                    required=""
-                  />
+                  <InputField type="number" fieldName="width" placeholder="23"/>
                 </div>
               </div>
               <div class="sm:col-span-2">
@@ -2543,4 +2448,16 @@ function CloseIcon() {
       />
     </svg>
   );
+}
+
+function InputField({type,fieldName,placeholder,value,required}){
+    return <input
+        type={type||'text'}
+        name={fieldName}
+        id={fieldName}
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+        placeholder={placeholder || ''}
+        required={required || ""}
+        value={value||""}
+    />
 }
