@@ -367,7 +367,7 @@ const Sub2 = () => {
                         </button>
                         {/** class="z-10 hidden px-3 pt-1 bg-white rounded-lg shadow w-80 dark:bg-gray-700 right-0"*/}
                         {/**filterDropdown:inset: '0px auto auto 0px', margin: '0px',transform: 'translate3d(582.5px, 131px, 0px)' */}
-                        {open ? FilterOptions() : null}
+                        {open ? <FilterOptions/> : null}
                       </Box>
                     </ClickAwayListener>
                     <div class="flex items-center space-x-3 w-full md:w-auto">
@@ -688,6 +688,10 @@ const Sub2 = () => {
 };
 
 function FilterOptions() {
+  const [displayCategory,setDisplayCategory]= useState(false);
+  const [displayPrice,setDisplayPrice]= useState(false);
+  const [displayWorldWideShipping,setDisplayWorldWideShipping]= useState(false);
+  const [displayRating,setDisplayRating]= useState(false);
   return (
     <div
       id="filterDropdown"
@@ -748,6 +752,7 @@ function FilterOptions() {
         {/*<!-- Category -->*/}
         <h2 id="category-heading">
           <button
+            onClick={e=>setDisplayCategory(!displayCategory)}
             type="button"
             class="flex items-center justify-between w-full py-2 px-1.5 text-sm font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700"
             data-accordion-target="#category-body"
@@ -773,153 +778,40 @@ function FilterOptions() {
         </h2>
         <div
           id="category-body"
-          class="hidden"
+          class={displayCategory ? '' : 'hidden'}
           aria-labelledby="category-heading"
         >
           <div class="py-2 font-light border-b border-gray-200 dark:border-gray-600">
             <ul class="space-y-2">
               <li class="flex items-center">
-                <input
-                  id="apple"
-                  type="checkbox"
-                  value=""
-                  class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                />
-                <label
-                  for="apple"
-                  class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
-                >
-                  Apple (56)
-                </label>
+                <Checkbox fieldLabel="Apple (56)" fieldName="apple"/>
               </li>
               <li class="flex items-center">
-                <input
-                  id="microsoft"
-                  type="checkbox"
-                  value=""
-                  class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                />
-                <label
-                  for="microsoft"
-                  class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
-                >
-                  Microsoft (45)
-                </label>
+              <Checkbox fieldLabel="Microsoft (45)" fieldName="microsoft"/>
               </li>
               <li class="flex items-center">
-                <input
-                  id="logitech"
-                  type="checkbox"
-                  value=""
-                  checked=""
-                  class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                />
-                <label
-                  for="logitech"
-                  class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
-                >
-                  Logitech (97)
-                </label>
+              <Checkbox fieldLabel="Logitech (97)" fieldName="logitech"/>
               </li>
               <li class="flex items-center">
-                <input
-                  id="sony"
-                  type="checkbox"
-                  value=""
-                  class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                />
-                <label
-                  for="sony"
-                  class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
-                >
-                  Sony (234)
-                </label>
+              <Checkbox fieldLabel="Sony (234)" fieldName="sony"/>
               </li>
               <li class="flex items-center">
-                <input
-                  id="asus"
-                  type="checkbox"
-                  value=""
-                  checked=""
-                  class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                />
-                <label
-                  for="asus"
-                  class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
-                >
-                  Asus (97)
-                </label>
+              <Checkbox fieldLabel="Asus (97)" fieldName="asus"/>
               </li>
               <li class="flex items-center">
-                <input
-                  id="dell"
-                  type="checkbox"
-                  value=""
-                  class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                />
-                <label
-                  for="dell"
-                  class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
-                >
-                  Dell (56)
-                </label>
+              <Checkbox fieldLabel="Dell (56)" fieldName="dell"/>
               </li>
               <li class="flex items-center">
-                <input
-                  id="msi"
-                  type="checkbox"
-                  value=""
-                  class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                />
-                <label
-                  for="msi"
-                  class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
-                >
-                  MSI (97)
-                </label>
+              <Checkbox fieldLabel="MSI (97)" fieldName="msi"/>
               </li>
               <li class="flex items-center">
-                <input
-                  id="canon"
-                  type="checkbox"
-                  value=""
-                  checked=""
-                  class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                />
-                <label
-                  for="canon"
-                  class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
-                >
-                  Canon (49)
-                </label>
+              <Checkbox fieldLabel="Canon (49)" fieldName="canon"/>
               </li>
               <li class="flex items-center">
-                <input
-                  id="benq"
-                  type="checkbox"
-                  value=""
-                  class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                />
-                <label
-                  for="benq"
-                  class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
-                >
-                  BenQ (23)
-                </label>
+              <Checkbox fieldLabel="BenQ (23)" fieldName="benq"/>
               </li>
               <li class="flex items-center">
-                <input
-                  id="razor"
-                  type="checkbox"
-                  value=""
-                  class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                />
-                <label
-                  for="razor"
-                  class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
-                >
-                  Razor (49)
-                </label>
+              <Checkbox fieldLabel="Razor (49)" fieldName="razor"/>
               </li>
               <a
                 href="#"
@@ -933,6 +825,7 @@ function FilterOptions() {
         {/*<!-- Price -->*/}
         <h2 id="price-heading">
           <button
+          onClick={e=>setDisplayPrice(!displayPrice)}
             type="button"
             class="flex items-center justify-between w-full py-2 px-1.5 text-sm font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700"
             data-accordion-target="#price-body"
@@ -956,7 +849,7 @@ function FilterOptions() {
             </svg>
           </button>
         </h2>
-        <div id="price-body" class="hidden" aria-labelledby="price-heading">
+        <div id="price-body" class={ displayPrice ? '':'hidden'} aria-labelledby="price-heading">
           <div class="flex items-center py-2 space-x-3 font-light border-b border-gray-200 dark:border-gray-600">
             <select
               id="price-from"
@@ -985,6 +878,7 @@ function FilterOptions() {
         {/*<!-- Worldwide Shipping -->*/}
         <h2 id="worldwide-shipping-heading">
           <button
+            onClick={e=>setDisplayWorldWideShipping(!displayWorldWideShipping)}
             type="button"
             class="flex items-center justify-between w-full py-2 px-1.5 text-sm font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700"
             data-accordion-target="#worldwide-shipping-body"
@@ -1010,7 +904,7 @@ function FilterOptions() {
         </h2>
         <div
           id="worldwide-shipping-body"
-          class="hidden"
+          class={ displayWorldWideShipping ? '':'hidden'}
           aria-labelledby="worldwide-shipping-heading"
         >
           <div class="py-2 space-y-2 font-light border-b border-gray-200 dark:border-gray-600">
@@ -1081,6 +975,7 @@ function FilterOptions() {
         {/*<!-- Rating -->*/}
         <h2 id="rating-heading">
           <button
+            onClick={e=>setDisplayRating(!displayRating)}
             type="button"
             class="flex items-center justify-between w-full py-2 px-1.5 text-sm font-medium text-left text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700"
             data-accordion-target="#rating-body"
@@ -1104,7 +999,8 @@ function FilterOptions() {
             </svg>
           </button>
         </h2>
-        <div id="rating-body" class="hidden" aria-labelledby="rating-heading">
+        <div id="rating-body" class={displayRating ? '' : 'hidden'}
+         aria-labelledby="rating-heading">
           <div class="py-2 space-y-2 font-light border-b border-gray-200 dark:border-gray-600">
             <div class="flex items-center">
               <input
@@ -2460,4 +2356,17 @@ function InputField({type,fieldName,placeholder,value,required}){
         required={required || ""}
         value={value||""}
     />
+}
+
+function Checkbox({fieldName,value,fieldLabel}){
+    return <><input
+            id={fieldName}
+            type="checkbox"
+            value={value||""}
+            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+            />
+            <label for={fieldName} class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+            {fieldLabel||""}
+            </label>
+            </>;
 }
