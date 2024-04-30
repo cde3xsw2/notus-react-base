@@ -336,20 +336,7 @@ const Sub2 = () => {
                       data-modal-toggle="createProductModal"
                       class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
                     >
-                      <svg
-                        class="h-3.5 w-3.5 mr-1.5 -ml-1"
-                        fill="currentColor"
-                        viewbox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true"
-                      >
-                        <path
-                          className="scale-75"
-                          clip-rule="evenodd"
-                          fill-rule="evenodd"
-                          d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                        />
-                      </svg>
+                      {AddIcon2()}
                       Add product
                     </button>
                     <ClickAwayListener onClickAway={handleClickAway}>
@@ -378,19 +365,7 @@ const Sub2 = () => {
                         type="button"
                       >
                         Actions
-                        <svg
-                          class="-mr-1 ml-1.5 w-5 h-5"
-                          fill="currentColor"
-                          viewbox="0 0 20 20"
-                          xmlns="http://www.w3.org/2000/svg"
-                          aria-hidden="true"
-                        >
-                          <path
-                            clip-rule="evenodd"
-                            fill-rule="evenodd"
-                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                          />
-                        </svg>
+                        {ArrowDownIcon}
                       </button>
                       <div
                         id="actionsDropdown"
@@ -687,6 +662,22 @@ const Sub2 = () => {
   );
 };
 
+function AddIcon2() {
+  return <svg
+    class="h-3.5 w-3.5 mr-1.5 -ml-1"
+    fill="currentColor"
+    viewbox="0 0 20 20"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <path
+      className="scale-75"
+      clip-rule="evenodd"
+      fill-rule="evenodd"
+      d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+  </svg>;
+}
+
 function FilterOptions() {
   const [displayCategory,setDisplayCategory]= useState(false);
   const [displayPrice,setDisplayPrice]= useState(false);
@@ -760,20 +751,7 @@ function FilterOptions() {
             aria-controls="category-body"
           >
             <span>Category</span>
-            <svg
-              aria-hidden="true"
-              data-accordion-icon=""
-              class="w-5 h-5 rotate-180 shrink-0"
-              fill="currentColor"
-              viewbox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              />
-            </svg>
+            {ArrowUpIcon()}
           </button>
         </h2>
         <div
@@ -833,20 +811,7 @@ function FilterOptions() {
             aria-controls="price-body"
           >
             <span>Price</span>
-            <svg
-              aria-hidden="true"
-              data-accordion-icon=""
-              class="w-5 h-5 rotate-180 shrink-0"
-              fill="currentColor"
-              viewbox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              />
-            </svg>
+            {ArrowUpIcon()}
           </button>
         </h2>
         <div id="price-body" class={ displayPrice ? '':'hidden'} aria-labelledby="price-heading">
@@ -879,20 +844,7 @@ function FilterOptions() {
             aria-controls="worldwide-shipping-body"
           >
             <span>Worldwide Shipping</span>
-            <svg
-              aria-hidden="true"
-              data-accordion-icon=""
-              class="w-5 h-5 rotate-180 shrink-0"
-              fill="currentColor"
-              viewbox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              />
-            </svg>
+            {ArrowUpIcon()}
           </button>
         </h2>
         <div
@@ -922,20 +874,7 @@ function FilterOptions() {
             aria-controls="rating-body"
           >
             <span>Rating</span>
-            <svg
-              aria-hidden="true"
-              data-accordion-icon=""
-              class="w-5 h-5 rotate-180 shrink-0"
-              fill="currentColor"
-              viewbox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              />
-            </svg>
+            {ArrowUpIcon()}
           </button>
         </h2>
         <div id="rating-body" class={displayRating ? '' : 'hidden'}
@@ -1007,6 +946,22 @@ function FilterOptions() {
       </div>
     </div>
   );
+}
+
+function ArrowUpIcon() {
+  return <svg
+    aria-hidden="true"
+    data-accordion-icon=""
+    class="w-5 h-5 rotate-180 shrink-0"
+    fill="currentColor"
+    viewbox="0 0 20 20"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+  </svg>;
 }
 
 function newFunction_2() {
@@ -1856,21 +1811,7 @@ function CreateProduct({ creating, closeFn }) {
                   class="flex flex-col justify-center items-center w-full h-64 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                 >
                   <div class="flex flex-col justify-center items-center pt-5 pb-6">
-                    <svg
-                      aria-hidden="true"
-                      class="mb-3 w-10 h-10 text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewbox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                      />
-                    </svg>
+                    {UploadIcon()}
                     <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
                       <span class="font-semibold">Click to upload</span>
                       or drag and drop
@@ -1931,6 +1872,23 @@ function CreateProduct({ creating, closeFn }) {
       </div>
     </div>
   );
+}
+
+function UploadIcon() {
+  return <svg
+    aria-hidden="true"
+    class="mb-3 w-10 h-10 text-gray-400"
+    fill="none"
+    stroke="currentColor"
+    viewbox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+  </svg>;
 }
 
 function ViewProduct({ viewing, closeFn }) {
@@ -2003,19 +1961,7 @@ function ViewProduct({ viewing, closeFn }) {
             Shipping
           </dt>
           <dd class="flex items-center text-gray-500 dark:text-gray-400">
-            <svg
-              class="w-4 h-4 mr-1.5"
-              aria-hidden="true"
-              fill="currentColor"
-              viewbox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                clip-rule="evenodd"
-              />
-            </svg>
+            {ShippingIcon()}
             United States, Europe
           </dd>
         </div>
@@ -2038,15 +1984,7 @@ function ViewProduct({ viewing, closeFn }) {
           </dt>
           <dd class="text-gray-500 dark:text-gray-400">
             <span class="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
-              <svg
-                aria-hidden="true"
-                class="mr-1 w-3 h-3"
-                fill="currentColor"
-                viewbox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
+              {ProductStateIcon()}
               New
             </span>
           </dd>
@@ -2087,44 +2025,77 @@ function ViewProduct({ viewing, closeFn }) {
           type="button"
           class="text-white w-full inline-flex items-center justify-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
         >
-          <svg
-            aria-hidden="true"
-            class="mr-1 -ml-1 w-5 h-5"
-            fill="currentColor"
-            viewbox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-            <path
-              fill-rule="evenodd"
-              d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-              clip-rule="evenodd"
-            />
-          </svg>
+          {EditIcon2()}
           Edit
         </button>
         <button
           type="button"
           class="inline-flex w-full items-center text-white justify-center bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900"
         >
-          <svg
-            aria-hidden="true"
-            class="w-5 h-5 mr-1.5 -ml-1"
-            fill="currentColor"
-            viewbox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-            />
-          </svg>
+          {DeleteIcon2()}
           Delete
         </button>
       </div>
     </div>
   );
+}
+
+function DeleteIcon2() {
+  return <svg
+    aria-hidden="true"
+    class="w-5 h-5 mr-1.5 -ml-1"
+    fill="currentColor"
+    viewbox="0 0 20 20"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" />
+  </svg>;
+}
+
+function EditIcon2() {
+  return <svg
+    aria-hidden="true"
+    class="mr-1 -ml-1 w-5 h-5"
+    fill="currentColor"
+    viewbox="0 0 20 20"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+    <path
+      fill-rule="evenodd"
+      d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+      clip-rule="evenodd" />
+  </svg>;
+}
+
+function ProductStateIcon() {
+  return <svg
+    aria-hidden="true"
+    class="mr-1 w-3 h-3"
+    fill="currentColor"
+    viewbox="0 0 20 20"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+  </svg>;
+}
+
+function ShippingIcon() {
+  return <svg
+    class="w-4 h-4 mr-1.5"
+    aria-hidden="true"
+    fill="currentColor"
+    viewbox="0 0 20 20"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fill-rule="evenodd"
+      d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+      clip-rule="evenodd" />
+  </svg>;
 }
 
 function CloseIcon() {
