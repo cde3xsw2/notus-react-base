@@ -851,28 +851,21 @@ function FilterOptions() {
         </h2>
         <div id="price-body" class={ displayPrice ? '':'hidden'} aria-labelledby="price-heading">
           <div class="flex items-center py-2 space-x-3 font-light border-b border-gray-200 dark:border-gray-600">
-            <select
-              id="price-from"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-            >
-              <option disabled="" selected="">
-                From
-              </option>
-              <option>$500</option>
-              <option>$2500</option>
-              <option>$5000</option>
-            </select>
-            <select
-              id="price-to"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-            >
-              <option disabled="" selected="">
-                To
-              </option>
-              <option>$500</option>
-              <option>$2500</option>
-              <option>$5000</option>
-            </select>
+            
+            <SelectField
+              options={[{label:"$500",},
+              {label:"$2500",},
+              {label:"$5000",},]}
+              defaultOptionLabel="From"
+              fieldName="price-from"
+            />
+            <SelectField
+              options={[{label:"$500",},
+              {label:"$2500",},
+              {label:"$5000",},]}
+              defaultOptionLabel="To"
+              fieldName="price-to"
+            />
           </div>
         </div>
         {/*<!-- Worldwide Shipping -->*/}
@@ -908,68 +901,14 @@ function FilterOptions() {
           aria-labelledby="worldwide-shipping-heading"
         >
           <div class="py-2 space-y-2 font-light border-b border-gray-200 dark:border-gray-600">
-            <label class="relative flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                value=""
-                class="sr-only peer"
-                name="shipping"
-                checked=""
-              />
-              <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 dark:peer-focus:ring-primary-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-primary-600"></div>
-              <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-                North America
-              </span>
-            </label>
-            <label class="relative flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                value=""
-                class="sr-only peer"
-                name="shipping"
-              />
-              <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 dark:peer-focus:ring-primary-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-primary-600"></div>
-              <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-                South America
-              </span>
-            </label>
-            <label class="relative flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                value=""
-                class="sr-only peer"
-                name="shipping"
-              />
-              <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 dark:peer-focus:ring-primary-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-primary-600"></div>
-              <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-                Asia
-              </span>
-            </label>
-            <label class="relative flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                value=""
-                class="sr-only peer"
-                name="shipping"
-                checked=""
-              />
-              <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 dark:peer-focus:ring-primary-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-primary-600"></div>
-              <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-                Australia
-              </span>
-            </label>
-            <label class="relative flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                value=""
-                class="sr-only peer"
-                name="shipping"
-              />
-              <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 dark:peer-focus:ring-primary-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-primary-600"></div>
-              <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-                Europe
-              </span>
-            </label>
+            <ShippingOption destination="North America"/>
+            <ShippingOption destination="South America"/>
+            <ShippingOption destination="Asia"/>
+            <ShippingOption destination="Australia"/>
+            <ShippingOption destination="Europe"/>
+                            
+                            
+                            
           </div>
         </div>
         {/*<!-- Rating -->*/}
@@ -1366,15 +1305,7 @@ function UpdateProduct({ editing, closeFn }) {
         </button>
         <div class="grid gap-4 sm:grid-cols-3 sm:gap-6 ">
           <div class="space-y-4 sm:col-span-2 sm:space-y-6">
-            <div>
-              <label
-                for="name"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Product Name
-              </label>
-              <InputField fieldName="name" placeholder="Type product name"/>
-            </div>
+              <InputField fieldName="name" placeholder="Type product name" labelDesc="Product Name"/>
             <div>
               <label
                 for="description"
@@ -1758,70 +1689,29 @@ function UpdateProduct({ editing, closeFn }) {
             </div>
           </div>
           <div class="space-y-4 sm:space-y-6">
-      <div>
-        <label
-          for="product-brand"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          Brand
-        </label>
-        <input
-          type="text"
-          id="product-brand"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+
+        <InputField
+          fieldName="product-brand"
           value="Apple"
+          labelDesc="Brand"
           placeholder="Product Brand"
-          required=""
         />
-      </div>
-      <div>
-        <label
-          for="category"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          Category
-        </label>
-        <select
-          id="category"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-        >
-          <option selected="">Electronics</option>
-          <option value="TV">TV/Monitors</option>
-          <option value="PC">PC</option>
-          <option value="GA">Gaming/Console</option>
-          <option value="PH">Phones</option>
-        </select>
-      </div>
-      <div>
-      <InputField type="number" fieldName="item-weight" placeholder="Ex. 12" value="12"/>
-      </div>
-      <div>
-        <label
-          for="length"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          Length (cm)
-        </label>
-        <InputField type="lenght" fieldName="lenght" placeholder="Ex. 105" value="105"/>
-      </div>
-      <div>
-        <label
-          for="breadth"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          Breadth (cm)
-        </label>
-        <InputField type="number" fieldName="breadth" placeholder="Ex. 15" value="15"/>
-      </div>
-      <div>
-        <label
-          for="width"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          Width (cm)
-        </label>
-        <InputField type="number" fieldName="width" placeholder="Ex. 23" value="23"/>
-      </div>
+
+        <SelectField
+          options={[
+            {selected:"",label:"Electronics",},
+            {value:"TV",label:"TV/Monitors",},
+            {value:"PC",label:"PC",},
+            {value:"GA",label:"Gaming/Console",},
+            {value:"PH",label:"Phones",},]}
+            fieldName="category"
+            defaultOptionLabel="Electronics"
+            labelDesc={"Category"}
+          />
+        <InputField type="number" fieldName="item-weight" placeholder="Ex. 12" value="12"/>
+        <InputField type="lenght" fieldName="lenght" placeholder="Ex. 105" value="105" labelDesc="Length (cm)"/>
+        <InputField type="number" fieldName="breadth" placeholder="Ex. 15" value="15" labelDesc="Breadth (cm)"/>
+        <InputField type="number" fieldName="width" placeholder="Ex. 23" value="23" labelDesc="Width (cm)"/>
     </div>
           {/*FilterOptions()*/}
         </div>
@@ -1873,89 +1763,26 @@ function CreateProduct({ creating, closeFn }) {
           {/*<!-- Modal body -->*/}
           <form action="#">
             <div class="grid gap-4 mb-4 sm:grid-cols-2">
-              <div>
-                <label
-                  for="name"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Product Name
-                </label>
-                <InputField fieldName="name" placeholder="Type product name"/>
-              </div>
-              <div>
-                <label
-                  for="category"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Category
-                </label>
-                <select
-                  id="category"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                >
-                  <option selected="">Select category</option>
-                  <option value="TV">TV/Monitors</option>
-                  <option value="PC">PC</option>
-                  <option value="GA">Gaming/Console</option>
-                  <option value="PH">Phones</option>
-                </select>
-              </div>
-              <div>
-                <label
-                  for="brand"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Brand
-                </label>
-                <InputField fieldName="brand" placeholder="Product brand"/>
-              </div>
-              <div>
-                <label
-                  for="price"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Price
-                </label>
-                <InputField type="number" fieldName="price" placeholder="$2999"/>
-              </div>
-              <div class="grid gap-4 sm:col-span-2 md:gap-6 sm:grid-cols-4">
-                <div>
-                  <label
-                    for="weight"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Item weight (kg)
-                  </label>
-                  <InputField type="number" fieldName="weight" placeholder="12"/>
-                </div>
-                <div>
-                  <label
-                    for="length"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Lenght (cm)
-                  </label>
-                  <InputField type="number" fieldName="length" placeholder="105"/>
-                </div>
-                <div>
-                  <label
-                    for="breadth"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Breadth (cm)
-                  </label>
-                  <InputField type="number" fieldName="breadth" placeholder="15"/>
-                </div>
-                <div>
-                  <label
-                    for="width"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Width (cm)
-                  </label>
-                  <InputField type="number" fieldName="width" placeholder="23"/>
-                </div>
-              </div>
+                <InputField fieldName="name" placeholder="Type product name" labelDesc="Product Name"/>
+                <SelectField
+                  options={[
+                    {value:"TV",label:"TV/Monitors",},
+                    {value:"PC",label:"PC",},
+                    {value:"GA",label:"Gaming/Console",},
+                    {value:"PH",label:"Phones",},]}
+                    fieldName="category"
+                    defaultOptionLabel="Select category"
+                    labelDesc="Category"
+                  />
+
+                <InputField fieldName="brand" placeholder="Product brand" labelDesc="Brand"/>
+
+
+                <InputField type="number" fieldName="price" placeholder="$2999" labelDesc="Price"/>
+                  <InputField type="number" fieldName="weight" placeholder="12" labelDesc="Item weight (kg)"/>
+                  <InputField type="number" fieldName="length" placeholder="105" labelDesc="Length (cm)"/>
+                  <InputField type="number" fieldName="breadth" placeholder="15" labelDesc="Breadth (cm)"/>
+                  <InputField type="number" fieldName="width" placeholder="23" labelDesc="Width (cm)"/>
               <div class="sm:col-span-2">
                 <label
                   for="description"
@@ -2318,16 +2145,18 @@ function CloseIcon() {
   );
 }
 
-function InputField({type,fieldName,placeholder,value,required}){
-    return <input
-        type={type||'text'}
-        name={fieldName}
-        id={fieldName}
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-        placeholder={placeholder || ''}
-        required={required || ""}
-        value={value||""}
-    />
+function InputField({type,fieldName,placeholder,value,required,className,labelDesc}){
+    return <FieldWithLabelWrapper className={className} labelDesc={labelDesc} fieldName={fieldName}>
+        <input
+          type={type||'text'}
+          name={fieldName}
+          id={fieldName}
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+          placeholder={placeholder || ''}
+          required={required || ""}
+          value={value||""}
+      />
+    </FieldWithLabelWrapper>
 }
 
 function Checkbox({fieldName,value,fieldLabel}){
@@ -2341,4 +2170,45 @@ function Checkbox({fieldName,value,fieldLabel}){
             {fieldLabel||""}
             </label>
             </>;
+}
+
+
+function SelectField({fieldName,options,defaultOptionLabel,className,labelDesc}){
+  return <FieldWithLabelWrapper className={className} labelDesc={labelDesc} fieldName={fieldName}>
+    <select
+    id={fieldName}
+    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+  >
+    <option selected="">{defaultOptionLabel || 'Select category'}</option>
+    {options && options.map(o=><option value={o.value||o.label}>{o.label}</option>)}
+  </select>
+  </FieldWithLabelWrapper>
+}
+
+function ShippingOption({destination}){
+  return <label class="relative flex items-center cursor-pointer">
+    <input
+      type="checkbox"
+      value=""
+      class="sr-only peer"
+      name="shipping"
+    />
+    <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 dark:peer-focus:ring-primary-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-primary-600"></div>
+    <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+      {destination}
+    </span>
+  </label>
+}
+
+
+function FieldWithLabelWrapper({labelDesc,children,fieldName,className}){
+  return <div class={className}>
+    <label
+      for={fieldName}
+      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+    >
+      {labelDesc}
+    </label>
+    {children}
+  </div>
 }
