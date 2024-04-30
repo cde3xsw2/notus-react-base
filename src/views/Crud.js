@@ -1102,78 +1102,7 @@ function newFunction_2() {
   );
 }
 
-function newFunction_1() {
-  return (
-    <div class="space-y-4 sm:space-y-6">
-      <div>
-        <label
-          for="product-brand"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          Brand
-        </label>
-        <input
-          type="text"
-          id="product-brand"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-          value="Apple"
-          placeholder="Product Brand"
-          required=""
-        />
-      </div>
-      <div>
-        <label
-          for="category"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          Category
-        </label>
-        <select
-          id="category"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-        >
-          <option selected="">Electronics</option>
-          <option value="TV">TV/Monitors</option>
-          <option value="PC">PC</option>
-          <option value="GA">Gaming/Console</option>
-          <option value="PH">Phones</option>
-        </select>
-      </div>
-      <div>
-      <InputField type="number" fieldName="item-weight" placeholder="Ex. 12" value="12"/>
-      </div>
-      <div>
-        <label
-          for="length"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          Length (cm)
-        </label>
-        <InputField type="lenght" fieldName="lenght" placeholder="Ex. 105" value="105"/>
-      </div>
-      <div>
-        <label
-          for="breadth"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          Breadth (cm)
-        </label>
-        <InputField type="number" fieldName="breadth" placeholder="Ex. 15" value="15"/>
-      </div>
-      <div>
-        <label
-          for="width"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          Width (cm)
-        </label>
-        <InputField type="number" fieldName="width" placeholder="Ex. 23" value="23"/>
-      </div>
-    </div>
-  );
-}
 
-function newFunction() {}
 
 const YellowStar = (
   <svg
@@ -1435,7 +1364,6 @@ function UpdateProduct({ editing, closeFn }) {
           <CloseIcon />
           <span class="sr-only">Close menu</span>
         </button>
-        {/*newFunction()*/}
         <div class="grid gap-4 sm:grid-cols-3 sm:gap-6 ">
           <div class="space-y-4 sm:col-span-2 sm:space-y-6">
             <div>
@@ -1829,8 +1757,75 @@ function UpdateProduct({ editing, closeFn }) {
               />
             </div>
           </div>
+          <div class="space-y-4 sm:space-y-6">
+      <div>
+        <label
+          for="product-brand"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >
+          Brand
+        </label>
+        <input
+          type="text"
+          id="product-brand"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+          value="Apple"
+          placeholder="Product Brand"
+          required=""
+        />
+      </div>
+      <div>
+        <label
+          for="category"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >
+          Category
+        </label>
+        <select
+          id="category"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+        >
+          <option selected="">Electronics</option>
+          <option value="TV">TV/Monitors</option>
+          <option value="PC">PC</option>
+          <option value="GA">Gaming/Console</option>
+          <option value="PH">Phones</option>
+        </select>
+      </div>
+      <div>
+      <InputField type="number" fieldName="item-weight" placeholder="Ex. 12" value="12"/>
+      </div>
+      <div>
+        <label
+          for="length"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >
+          Length (cm)
+        </label>
+        <InputField type="lenght" fieldName="lenght" placeholder="Ex. 105" value="105"/>
+      </div>
+      <div>
+        <label
+          for="breadth"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >
+          Breadth (cm)
+        </label>
+        <InputField type="number" fieldName="breadth" placeholder="Ex. 15" value="15"/>
+      </div>
+      <div>
+        <label
+          for="width"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >
+          Width (cm)
+        </label>
+        <InputField type="number" fieldName="width" placeholder="Ex. 23" value="23"/>
+      </div>
+    </div>
           {/*FilterOptions()*/}
         </div>
+
         {/*newFunction_1()*/}
 
         {newFunction_2()}
@@ -2150,42 +2145,19 @@ function ViewProduct({ viewing, closeFn }) {
         <span class="sr-only">Close menu</span>
       </button>
       <div class="grid grid-cols-3 gap-4 mb-4 sm:mb-5">
-        <div class="p-2 w-auto bg-gray-100 rounded-lg dark:bg-gray-700">
+        {[{image:"https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"},
+        {image:"https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"},
+        {image:"https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png",},  
+        {image:"https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"},
+        {image:"https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"},
+        {image:"https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"}]
+        .map(e=><div class="p-2 w-auto bg-gray-100 rounded-lg dark:bg-gray-700">
           <img
-            src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
-            alt="iMac Side Image"
-          />
-        </div>
-        <div class="p-2 w-auto bg-gray-100 rounded-lg dark:bg-gray-700">
-          <img
-            src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
+            src={e.image}
             alt="iMac Front Image"
           />
-        </div>
-        <div class="p-2 w-auto bg-gray-100 rounded-lg dark:bg-gray-700">
-          <img
-            src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
-            alt="iMac Back Image"
-          />
-        </div>
-        <div class="p-2 w-auto bg-gray-100 rounded-lg dark:bg-gray-700">
-          <img
-            src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
-            alt="iMac Back Image"
-          />
-        </div>
-        <div class="p-2 w-auto bg-gray-100 rounded-lg dark:bg-gray-700">
-          <img
-            src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
-            alt="iMac Front Image"
-          />
-        </div>
-        <div class="p-2 w-auto bg-gray-100 rounded-lg dark:bg-gray-700">
-          <img
-            src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
-            alt="iMac Side Image"
-          />
-        </div>
+        </div>)}
+
       </div>
       <dl class="sm:mb-5">
         <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
