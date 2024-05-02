@@ -2,7 +2,7 @@ import React from "react";
 import { ClickAwayListener } from "@mui/base/ClickAwayListener";
 import Box from "@mui/material/Box";
 import { FilterOptions } from "components/Crud/FilterOptions.js";
-import { SalesIcon,EditIcon,PreviewIcon,DeleteIcon,MoreInfoIcon, SettingsIcon, SearchIcon, AddIcon2, FilterIcon, ArrowDownIcon,RedCircle,OrangeCircle,YellowCircle,GreenCircle } from "components/Crud/Icons";
+import { SalesIcon,EditIcon,PreviewIcon,DeleteIcon,MoreInfoIcon, SettingsIcon, SearchIcon, AddIcon, FilterIcon, ArrowDownIcon,RedCircle,OrangeCircle,YellowCircle,GreenCircle } from "components/Crud/Icons";
 import { Rating, } from "components/Crud/PageComponents";
 
 
@@ -280,7 +280,7 @@ export function TableComponent(setCreating, handleClickAway, handleClick, open, 
             data-modal-toggle="createProductModal"
             class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
           >
-            {AddIcon2()}
+            {AddIcon()}
             Add product
           </button>
           <ClickAwayListener onClickAway={handleClickAway}>
@@ -385,8 +385,7 @@ export function TableComponent(setCreating, handleClickAway, handleClick, open, 
             </tr>
           </thead>
           <tbody>
-            {
-        /*products*/ products.map((p) => (
+            { products.map((p) => (
               <Row
                 name={p.name}
                 image={p.image}
