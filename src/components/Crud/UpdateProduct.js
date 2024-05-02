@@ -4,7 +4,7 @@ import { InputField, SelectField } from "components/Crud/PageComponents";
 import {DateIcon,UploadImagenIcon2,RemoveImageIcon,FullScreenIcon,SettingsIcon,AddListIcon,AddEmojiIcon,FormatCodeIcon,UploadImageIcon,EmbedMapIcon,AttachFileIcon,SettingsIcon2,DeleteIcon_2} from "components/Crud/Icons";
 
 
-export function newFunction_2() {
+export function Footer() {
   return (
     <div class="grid grid-cols-2 gap-4 mt-6 sm:w-1/2">
       <button
@@ -291,7 +291,7 @@ export function UpdateProduct({ editing, closeFn }) {
 
         {/*newFunction_1()*/}
 
-        {newFunction_2()}
+        {Footer()}
       </form>
     </div>
   );
