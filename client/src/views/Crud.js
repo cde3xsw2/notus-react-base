@@ -85,7 +85,23 @@ const Sub2 = () => {
           {/**** */}
           {/*<!-- Start block -->*/}
           <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 antialiased">
-            {TableComponent(setCreating, handleClickAway, handleClick, open, setEditing, setViewing,setDeleting)}
+            <TableComponent
+              setCreating={setCreating} 
+              handleClickAway={handleClickAway} 
+              handleClick={handleClick}
+              open={open} 
+              setEditing={setEditing} 
+              setViewing={setViewing}
+              setDeleting={setDeleting}
+              title="All Products"
+              subtitle="123456"
+              fromResult="1"
+              toResult={100}
+              totalResults={436}
+              addElementText="Add product"
+              />
+
+            
           </section>
           {/*<!-- End block -->*/}
 

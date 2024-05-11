@@ -6,6 +6,24 @@ import { SalesIcon,EditIcon,PreviewIcon,DeleteIcon,MoreInfoIcon, SettingsIcon, S
 import { Rating, } from "components/Crud/PageComponents";
 
 
+function ColumnHeader({children}){
+  return <th scope="col" class="p-4">
+      {children}
+  </th>
+}
+
+function SelectRow(){
+  return <div class="flex items-center">
+      <input
+        id="checkbox-all"
+        type="checkbox"
+        class="w-4 h-4 text-primary-600 bg-gray-100 rounded border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+      <label for="checkbox-all" class="sr-only">
+        checkbox
+      </label>
+    </div>
+}
+
 const getStockStatus = (stock) => {
   if (!stock) {
     return;
@@ -213,18 +231,24 @@ function Row({
     </tr>
   );
 }
-
-export function TableComponent(setCreating, handleClickAway, handleClick, open, setEditing, setViewing,setDeleting) {
+/*title:All Products
+subtitle:123456
+fromResult:1
+toResult:100
+totalResults:436
+addElementText:Add product
+*/
+export function TableComponent({setCreating, handleClickAway, handleClick, open, setEditing, setViewing,setDeleting,title,subtitle,totalResults,fromResult,toResult,addElementText}) {
   return <div class="mx-auto max-w-screen-2xl px-4 lg:px-12">
     <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden ">
       <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-3 md:space-y-0 md:space-x-4 p-4 ">
         <div class="flex-1 flex items-center space-x-2">
           <h5>
-            <span class="text-gray-500">All Products:</span>
-            <span class="dark:text-white">123456</span>
+            <span class="text-gray-500">{title}</span>
+            <span class="dark:text-white">{subtitle}</span>
           </h5>
           <h5 class="text-gray-500 dark:text-gray-400 ml-1">
-            1-100 (436)
+            {fromResult}-{toResult} ({totalResults})
           </h5>
           <button
             type="button"
@@ -232,32 +256,32 @@ export function TableComponent(setCreating, handleClickAway, handleClick, open, 
             data-tooltip-target="results-tooltip"
           >
             {MoreInfoIcon}
-            <span class="sr-only">More info</span>
+            <span class="sr-only">Más información</span>
           </button>
           <div
             id="results-tooltip"
             role="tooltip"
             class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
           >
-            Showing 1-100 of 436 results
+            Mostrado {fromResult}-{toResult} de {totalResults} resultados
             <div class="tooltip-arrow" data-popper-arrow=""></div>
           </div>
         </div>
-        <div class="flex-shrink-0 flex flex-col items-start md:flex-row md:items-center lg:justify-end space-y-3 md:space-y-0 md:space-x-3">
+        {false && <div class="flex-shrink-0 flex flex-col items-start md:flex-row md:items-center lg:justify-end space-y-3 md:space-y-0 md:space-x-3">
           <button
             type="button"
             class="flex-shrink-0 inline-flex items-center justify-center py-2 px-3 text-xs font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
           >
             {SettingsIcon}
-            Table settings
+            Configuración de tabla
           </button>
-        </div>
+        </div>}
       </div>
       <div class="flex flex-col md:flex-row items-stretch md:items-center md:space-x-3 space-y-3 md:space-y-0 justify-between mx-4 py-4 border-t dark:border-gray-700">
         <div class="w-full md:w-1/2">
           <form class="flex items-center">
             <label for="simple-search" class="sr-only">
-              Search
+              Búsqueda
             </label>
             <div class="relative w-full">
               <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -266,7 +290,7 @@ export function TableComponent(setCreating, handleClickAway, handleClick, open, 
               <input
                 type="text"
                 id="simple-search"
-                placeholder="Search for products"
+                placeholder="Busqueda de productos"
                 required=""
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
             </div>
@@ -280,8 +304,8 @@ export function TableComponent(setCreating, handleClickAway, handleClick, open, 
             data-modal-toggle="createProductModal"
             class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
           >
-            {AddIcon()}
-            Add product
+            {AddIcon}
+            {addElementText}
           </button>
           <ClickAwayListener onClickAway={handleClickAway}>
             <Box sx={{ position: "relative" }} alignSelf={true}>
@@ -301,7 +325,7 @@ export function TableComponent(setCreating, handleClickAway, handleClick, open, 
               {open ? <FilterOptions /> : null}
             </Box>
           </ClickAwayListener>
-          <div class="flex items-center space-x-3 w-full md:w-auto">
+          {false && <div class="flex items-center space-x-3 w-full md:w-auto">
             <button
               id="actionsDropdownButton"
               data-dropdown-toggle="actionsDropdown"
@@ -337,51 +361,25 @@ export function TableComponent(setCreating, handleClickAway, handleClick, open, 
                 </a>
               </div>
             </div>
-          </div>
+          </div>}
         </div>
       </div>
       <div class="overflow-x-auto">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" class="p-4">
-                <div class="flex items-center">
-                  <input
-                    id="checkbox-all"
-                    type="checkbox"
-                    class="w-4 h-4 text-primary-600 bg-gray-100 rounded border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                  <label for="checkbox-all" class="sr-only">
-                    checkbox
-                  </label>
-                </div>
-              </th>
-              <th scope="col" class="p-4">
-                Product
-              </th>
-              <th scope="col" class="p-4">
-                Category
-              </th>
-              <th scope="col" class="p-4">
-                Stock
-              </th>
-              <th scope="col" class="p-4">
-                Sales/Day
-              </th>
-              <th scope="col" class="p-4">
-                Sales/Month
-              </th>
-              <th scope="col" class="p-4">
-                Rating
-              </th>
-              <th scope="col" class="p-4">
-                Sales
-              </th>
-              <th scope="col" class="p-4">
-                Revenue
-              </th>
-              <th scope="col" class="p-4">
-                Last Update
-              </th>
+            <ColumnHeader>
+                <SelectRow/>
+              </ColumnHeader>
+              <ColumnHeader>Product</ColumnHeader>
+              <ColumnHeader>Category</ColumnHeader>
+              <ColumnHeader>Stock</ColumnHeader>
+              <ColumnHeader>Sales/Day</ColumnHeader>
+              <ColumnHeader>Sales/Month</ColumnHeader>
+              <ColumnHeader>Rating</ColumnHeader>
+              <ColumnHeader>Sales</ColumnHeader>
+              <ColumnHeader>Revenue</ColumnHeader>
+              <ColumnHeader>Last Update</ColumnHeader>
             </tr>
           </thead>
           <tbody>
@@ -409,13 +407,13 @@ export function TableComponent(setCreating, handleClickAway, handleClick, open, 
         aria-label="Table navigation"
       >
         <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-          Showing
+          Mostrando
           <span class="font-semibold text-gray-900 dark:text-white">
-            1-10
+            {fromResult}-{toResult}
           </span>
-          of
+          de
           <span class="font-semibold text-gray-900 dark:text-white">
-            1000
+            {totalResults}
           </span>
         </span>
         <ul class="inline-flex items-stretch -space-x-px">
@@ -424,9 +422,9 @@ export function TableComponent(setCreating, handleClickAway, handleClick, open, 
               href="#"
               class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             >
-              <span class="sr-only">Previous</span>
+              <span class="sr-only">Previo</span>
               <svg
-                class="w-5 h-5"
+                class="w-5 h-5 "
                 aria-hidden="true"
                 fill="currentColor"
                 viewbox="0 0 20 20"
@@ -434,6 +432,7 @@ export function TableComponent(setCreating, handleClickAway, handleClick, open, 
               >
                 <path
                   fill-rule="evenodd"
+                  class=""
                   d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
                   clip-rule="evenodd" />
               </svg>
@@ -485,7 +484,7 @@ export function TableComponent(setCreating, handleClickAway, handleClick, open, 
               href="#"
               class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             >
-              <span class="sr-only">Next</span>
+              <span class="sr-only">Siguiente</span>
               <svg
                 class="w-5 h-5"
                 aria-hidden="true"
