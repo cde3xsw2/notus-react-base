@@ -5,12 +5,29 @@ Primary FastPI ASGI application
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
-from app.api.endpoints import api_routes
+from app.users.endpoints import api_routes
+from fastapi.responses import PlainTextResponse,JSONResponse
+from starlette.exceptions import HTTPException as StarletteHTTPException
+from fastapi.exceptions import RequestValidationError#, ValidationError
 
 
 def create_app():
     # Initialize FastAPI app
     app = FastAPI()
+
+    
+    @app.exception_handler(StarletteHTTPException)
+    async def http_exception_handler(request, exc):
+        return JSONResponse(
+            status_code=exc.status_code,
+            content={'message':str(exc.detail)}
+            #content={"message": f"Oops! {exc.name} did something. There goes a rainbow..."},
+        )
+
+
+    @app.exception_handler(RequestValidationError)
+    async def validation_exception_handler(request, exc):
+        return PlainTextResponse(str(exc), status_code=400)
 
     # Enable CORS via middleware
     app.add_middleware(
