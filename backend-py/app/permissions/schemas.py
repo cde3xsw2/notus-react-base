@@ -16,11 +16,11 @@ from pydantic import BaseModel
 
 from typing import Optional
 
-class UserBase(BaseModel):
+'''class UserBase(BaseModel):
   first_name: str
   last_name: str
   email: str
-  #enabled: Optional[bool] = True
+  enabled: Optional[bool] = True
 
 class UserCreate(UserBase):
   pass
@@ -30,9 +30,10 @@ class UserUpdate(UserBase):
 
 class UserOut(UserBase):
   id: str
-  #insertion_date: datetime
-  #update_date: datetime
+  insertion_date: datetime
+  update_date: datetime
   
 
   class Config:
     orm_mode = True
+'''

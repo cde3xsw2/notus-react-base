@@ -5,7 +5,7 @@ from google.cloud import ndb
 
 
 from .schemas import UserOut,UserCreate,UserUpdate
-from .models import User,UserStatus
+from .models import User
 
 client = ndb.Client()
 
@@ -14,11 +14,12 @@ client = ndb.Client()
 api_routes = APIRouter()
 
 
-@api_routes.post("/users", response_model=UserOut)
+'''@api_routes.post("/users", response_model=UserOut)
 async def create_user(user: UserCreate):
   with client.context():
     new_user = User(**user.dict())  # Convert UserCreate to User model
     new_user.put()
+    #new_user.id=new_user.key.urlsafe()
   return new_user
 
 
@@ -52,4 +53,4 @@ async def delete_user(user_id: int):
   if not user:
     raise HTTPException(status_code=404, detail="User not found")
   user.key.delete()
-  return {"message": "User deleted successfully"}
+  return {"message": "User deleted successfully"}'''

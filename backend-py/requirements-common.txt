@@ -1,5 +1,6 @@
 # Common requirements used across local dev and production
-FastAPI==0.65.2
+FastAPI==0.111.0
 gunicorn==20.0.4
-starlette==0.14.2
-uvicorn==0.11.7
+starlette==0.37.2
+uvicorn==0.25.0
+google-cloud-ndb
