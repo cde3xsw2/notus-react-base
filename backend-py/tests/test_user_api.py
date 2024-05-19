@@ -64,7 +64,7 @@ def test_login(client):
     for key in json_response.keys():
         assert key in _VALID_LOGIN_FIELDS
     headers = {'Authorization':f'Bearer {access_token}'}
-    response: Response = client.get('/users/me',headers=headers)
+    response: Response = client.get('/auth/users/me',headers=headers)
     json_response = response.json()
     print(response.json())
     #for key in json_response.keys():

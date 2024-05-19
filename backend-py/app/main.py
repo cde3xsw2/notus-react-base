@@ -6,6 +6,7 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
 from app.users.endpoints import users_routes
+from app.auth.endpoints import auth_routes
 from app.api.endpoints import api_routes
 from fastapi.responses import PlainTextResponse,JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
@@ -41,6 +42,7 @@ def create_app():
 
     app.include_router(api_routes)
     app.include_router(users_routes)
+    app.include_router(auth_routes)
 
     return app
 
