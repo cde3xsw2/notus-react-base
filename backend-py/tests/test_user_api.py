@@ -45,7 +45,7 @@ class TestUserApi:
         cls.login_headers = {'Authorization':f'Bearer {access_token}'}
 
     def test_create_user_success(self):
-        response: Response = self.client.post('/users/',json=self.data)
+        response: Response = self.client.post('/users/',json=self.data,headers=self.login_headers)
         assert response.status_code == 200
         json_response = response.json()
         assert json_response.get('first_name') == self.first_name
@@ -57,7 +57,7 @@ class TestUserApi:
         
         
     def test_get_user(self):
-        response: Response = self.client.post('/users/',json=self.data)
+        response: Response = self.client.post('/users/',json=self.data,headers=self.login_headers)
         response: Response = self.client.get(f'/users/{response.json().get("id")}')
         assert response.status_code == 200
         json_response = response.json()
@@ -69,7 +69,7 @@ class TestUserApi:
             assert key in _VALID_USER_FIELDS
             
     def test_update_user(self):
-        response: Response = self.client.post('/users/',json=self.data)
+        response: Response = self.client.post('/users/',json=self.data,headers=self.login_headers)
         json_response = response.json()
         id = json_response.get("id")
         json_response['id']='invalid-id'
@@ -85,12 +85,12 @@ class TestUserApi:
             assert key in _VALID_USER_FIELDS
 
     def test_delete_user(self):
-        response: Response = self.client.post('/users/',json=self.data)
+        response: Response = self.client.post('/users/',json=self.data,headers=self.login_headers)
         json_response = response.json()
         id = json_response.get("id")
-        response: Response = self.client.delete(f'/users/{id}')
+        response: Response = self.client.delete(f'/users/{id}',headers=self.login_headers)
         assert response.status_code == 200
-        response: Response = self.client.get(f'/users/{id}')
+        response: Response = self.client.get(f'/users/{id}',headers=self.login_headers)
         assert response.status_code == 404
         
             
@@ -99,7 +99,7 @@ class TestUserApi:
         assert response.status_code == 404
             
     def test_create_user_with_create_permission(self):
-        response: Response = self.client.post('/users/',json=self.data)
+        response: Response = self.client.post('/users/',json=self.data,headers=self.login_headers)
         assert response.status_code == 200
         
         #json_response = response.json()

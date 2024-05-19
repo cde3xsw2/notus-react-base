@@ -4,6 +4,7 @@ Primary API route endpoints
 from google.cloud import ndb
 from app.commons.models import BaseNdbModel
 from app.users.models import BranchUser
+from enum import IntEnum
 
 client = ndb.Client()
     
@@ -23,30 +24,10 @@ class BranchGroup(ndb.Model):
 '''
         
 
-CREATE_PERMISSION = 1 << 3
-READ_PERMISSION = 1 << 2
-UPDATE_PERMISSION = 1 << 1
-DELETE_PERMISSION = 1 << 0
-
-CREATE_PERMISSION = 1 << 3
-READ_PERMISSION = 1 << 2
-UPDATE_PERMISSION = 1 << 1
-DELETE_PERMISSION = 1 << 0
 # 9(listio) 8(cio) 7(rio) 6(uio) 5(dio) , if current_user == e.user_id 4(list) 
 #           5(print) 4(list)
 # 3(c) 2(r) 1(u) 0(d) 
 #OWN PERMISSIONS
-PERMISSION_TO_CREATE_ENTITY = 1 << 0
-PERMISSION_TO_READ_ENTITY = 1 << 1
-PERMISSION_TO_UPDATE_ENTITY = 1 << 2
-PERMISSION_TO_DELETE_ENTITY = 1 << 3
-PERMISSION_TO_LIST_ENTITIES = 1 << 4
-
-PERMISSION_TO_CREATE_ENTITY_ON_BEHALF_OF_ANOTHER_USER = PERMISSION_TO_CREATE_ENTITY << 10
-PERMISSION_TO_READ_ANOTHER_USER_S_ENTITY = PERMISSION_TO_READ_ENTITY << 10
-PERMISSION_TO_UPDATE_ANOTHER_USER_S_ENTITY = PERMISSION_TO_UPDATE_ENTITY << 10
-PERMISSION_TO_DELETE_ANOTHER_USER_S_ENTITY = PERMISSION_TO_DELETE_ENTITY << 10
-PERMISSION_TO_LIST_OTHER_USERS_ENTITIES = PERMISSION_TO_LIST_ENTITIES << 10
 
 
 '''GET /api/users/ if permissions == (PERMISSION_TO_LIST_ENTITIES||PERMISSION_TO_LIST_OTHER_USERS_ENTITIES)
@@ -86,20 +67,39 @@ ContentModerator = CREATE+READ+UPDATE+DELETE()
 ContentCreator = 
 Desarrollador = 
 '''
-class TablePermission(ndb.Model):
-  table_name = ndb.StringProperty()#ndb.Model 
+PERMISSION_TO_CREATE_ENTITY = 1 << 0
+PERMISSION_TO_READ_ENTITY = 1 << 1
+PERMISSION_TO_UPDATE_ENTITY = 1 << 2
+PERMISSION_TO_DELETE_ENTITY = 1 << 3
+PERMISSION_TO_LIST_ENTITIES = 1 << 4
+
+PERMISSION_TO_CREATE_ENTITY_ON_BEHALF_OF_ANOTHER_USER = PERMISSION_TO_CREATE_ENTITY << 10
+PERMISSION_TO_READ_ANOTHER_USER_S_ENTITY = PERMISSION_TO_READ_ENTITY << 10
+PERMISSION_TO_UPDATE_ANOTHER_USER_S_ENTITY = PERMISSION_TO_UPDATE_ENTITY << 10
+PERMISSION_TO_DELETE_ANOTHER_USER_S_ENTITY = PERMISSION_TO_DELETE_ENTITY << 10
+PERMISSION_TO_LIST_OTHER_USERS_ENTITIES = PERMISSION_TO_LIST_ENTITIES << 10
+
+
+class EntityName(IntEnum):
+  ACTIVATED = 0
+  DISABLED = 1
+  DELETED = 2
+  EMAIL_VALIDATION_REQUIRED = 3
+  
+class EntityPermission(ndb.Model):
+  entity_name = ndb.IntegerProperty(required = True, choices=list(EntityName))
   #user = BranchUser
-  role = BranchRole
+  #role = BranchRole
   #branch_permission = ndb.IntegerProperty()#An ndb.IntegerProperty in NDB stores 8 bytes.
   permissions = ndb.IntegerProperty(indexed=False)
   
-TablePermission(role=BranchRole.ADMIN, CREATE_PERMISSION && READ_PERMISSION)
-  
+#TablePermission(role=BranchRole.ADMIN, CREATE_PERMISSION && READ_PERMISSION)
   
   
 
-  
 
+  
+'''
 class Permissions(ndb.Model):
     bzz_permission_1 = ndb.StringProperty()
     
@@ -126,7 +126,12 @@ class Configuration(ndb.Model):
 class ExternalUser(ndb.Model):
     name= ndb.StringProperty()
     insertion_date = ndb.DateProperty(auto_now_add=True)
-    update_date = ndb.DateProperty(auto_now=True)
+    update_date = ndb.DateProperty(auto_now=True)'''
+    
+    
+    
+    
+###NO
 '''
 class ExternalUser(ndb.Model):
     name= ndb.StringProperty()

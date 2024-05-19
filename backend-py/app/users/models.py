@@ -59,6 +59,7 @@ class User(BaseNdbModel):
   update_date = ndb.DateTimeProperty(auto_now=True)
   
   status = ndb.IntegerProperty(required = True, choices=list(UserStatus),default=UserStatus.EMAIL_VALIDATION_REQUIRED)
+  roles = ndb.KeyProperty(repeated=True)#kind=BranchRole
 
   # Additional methods for user management can be added here
   @property
