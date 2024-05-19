@@ -31,7 +31,6 @@ _VALID_USER_FIELDS = ['first_name','last_name','email','id',]
 _VALID_LOGIN_FIELDS = ['access_token','token_type']
 
 def test_create_user_success(client):
-    
     response: Response = client.post('/users/',json=data)
     assert response.status_code == 200
     json_response = response.json()
@@ -46,6 +45,7 @@ def test_create_user_success(client):
 def test_get_user(client):
     response: Response = client.post('/users/',json=data)
     response: Response = client.get(f'/users/{response.json().get("id")}')
+    assert response.status_code == 200
     json_response = response.json()
     assert json_response.get('first_name') == first_name
     assert json_response.get('last_name') == last_name
@@ -54,10 +54,40 @@ def test_get_user(client):
     for key in json_response.keys():
         assert key in _VALID_USER_FIELDS
         
+def test_update_user(client):
+    response: Response = client.post('/users/',json=data)
+    json_response = response.json()
+    id = json_response.get("id")
+    json_response['id']='invalid-id'
+    json_response['status']='invalid-status'
+    response: Response = client.put(f'/users/{id}',json=data)
+    assert response.status_code == 200
+    json_response = response.json()
+    assert json_response.get('first_name') == first_name
+    assert json_response.get('last_name') == last_name
+    assert json_response.get('email') == email
+    assert json_response.get('id') == id
+    for key in json_response.keys():
+        assert key in _VALID_USER_FIELDS
+
+def test_delete_user(client):
+    response: Response = client.post('/users/',json=data)
+    json_response = response.json()
+    id = json_response.get("id")
+    response: Response = client.delete(f'/users/{id}')
+    assert response.status_code == 200
+    response: Response = client.get(f'/users/{id}')
+    assert response.status_code == 404
+    
+        
+def test_get_user_not_found(client):
+    response: Response = client.get(f'/users/user-doesnt-exist')
+    assert response.status_code == 404
+        
 def test_login(client):
     from app.users.models import User 
     from app.auth.endpoints import get_password_hash
-    user = User.create(first_name='Lazlo',last_name='Lozla',email='lazlo@lozla.com',password=get_password_hash('secret'))
+    User.create_entity(first_name='Lazlo',last_name='Lozla',email='lazlo@lozla.com',password=get_password_hash('secret'))
     headers = {"Content-Type": "application/x-www-form-urlencoded"}
     data = {'username': 'lazlo@lozla.com','password':'secret'}
     response: Response = client.post('/token',data=data,headers=headers)
@@ -75,6 +105,4 @@ def test_login(client):
     json_response = response.json()
     for key in json_response.keys():
         assert key in _VALID_USER_FIELDS
-    
-    assert False
-    
+        
