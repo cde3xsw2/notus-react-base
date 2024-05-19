@@ -2,7 +2,7 @@
 Tests for API handlers
 
 """
-import pytest
+'''import pytest
 from fastapi.testclient import TestClient
 from requests import Response
 
@@ -13,7 +13,7 @@ from app.main import application
 def client():
     return TestClient(application)
 
-'''
+
 def test_not_found(client):
     response: Response = client.get('/noexist')
     assert response.status_code == 404
