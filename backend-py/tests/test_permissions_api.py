@@ -19,8 +19,8 @@ from your_app import app  # Replace with your app's import path
 def client():
     return TestClient(application)
 
-first_name = "Losla"
-last_name = "Laslo"
+first_name = "Lazlo"
+last_name = "Lozla"
 email = "laslo.losla@chacarron.com"
 enabled = True
 data = {"first_name": first_name, "last_name": last_name,"email":email,"enabled":enabled}

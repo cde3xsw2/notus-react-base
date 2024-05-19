@@ -9,100 +9,139 @@ from requests import Response
 from app.main import application
 #from app.users import 
 from google.cloud import ndb
+from app.users.models import User 
+from app.auth.endpoints import get_password_hash
+from unittest.mock import patch  # Assuming you use unittest.mock for patching
+
 '''
 from fastapi.testclient import TestClient
 from your_app import app  # Replace with your app's import path
 
 '''
 
-clnt = ndb.Client()
-
-@pytest.fixture(scope='module', autouse=True)
+'''@pytest.fixture(scope='module', autouse=True)
 def client():
-    return TestClient(application)
-
-first_name = "Losla"
-last_name = "Laslo"
-email = "laslo.losla@chacarron.com"
-enabled = True
-data = {"first_name": first_name, "last_name": last_name,"email":email,"enabled":enabled}
+'''
 
 _VALID_USER_FIELDS = ['first_name','last_name','email','id',]
 _VALID_LOGIN_FIELDS = ['access_token','token_type']
 
-def test_create_user_success(client):
-    response: Response = client.post('/users/',json=data)
-    assert response.status_code == 200
-    json_response = response.json()
-    assert json_response.get('first_name') == first_name
-    assert json_response.get('last_name') == last_name
-    assert json_response.get('email') == email
-    assert json_response.get('id') is not None
-    for key in json_response.keys():
-        assert key in _VALID_USER_FIELDS
-    
-    
-def test_get_user(client):
-    response: Response = client.post('/users/',json=data)
-    response: Response = client.get(f'/users/{response.json().get("id")}')
-    assert response.status_code == 200
-    json_response = response.json()
-    assert json_response.get('first_name') == first_name
-    assert json_response.get('last_name') == last_name
-    assert json_response.get('email') == email
-    assert json_response.get('id') is not None
-    for key in json_response.keys():
-        assert key in _VALID_USER_FIELDS
+class TestUserApi:
         
-def test_update_user(client):
-    response: Response = client.post('/users/',json=data)
-    json_response = response.json()
-    id = json_response.get("id")
-    json_response['id']='invalid-id'
-    json_response['status']='invalid-status'
-    response: Response = client.put(f'/users/{id}',json=data)
-    assert response.status_code == 200
-    json_response = response.json()
-    assert json_response.get('first_name') == first_name
-    assert json_response.get('last_name') == last_name
-    assert json_response.get('email') == email
-    assert json_response.get('id') == id
-    for key in json_response.keys():
-        assert key in _VALID_USER_FIELDS
+    @classmethod
+    def setup_class(cls,):
+        cls.client = TestClient(application)
+        cls.first_name = "Lazlo"
+        cls.last_name = "Lozla"
+        cls.email = "laslo.losla@chacarron.com"
+        enabled = True
+        cls.data = {"first_name": cls.first_name, "last_name": cls.last_name,"email":cls.email,"enabled":enabled}
+        User.create_entity(first_name='Lazlo',last_name='Lozla',email='lazlo@lozla.com',password=get_password_hash('secret'))
+        cls.headers = {"Content-Type": "application/x-www-form-urlencoded"}
+        data = {'username': 'lazlo@lozla.com','password':'secret'}
+        response: Response = cls.client.post('/token',data=data,headers=cls.headers)
+        json_response = response.json()
+        access_token = json_response.get('access_token')
+        cls.login_headers = {'Authorization':f'Bearer {access_token}'}
 
-def test_delete_user(client):
-    response: Response = client.post('/users/',json=data)
-    json_response = response.json()
-    id = json_response.get("id")
-    response: Response = client.delete(f'/users/{id}')
-    assert response.status_code == 200
-    response: Response = client.get(f'/users/{id}')
-    assert response.status_code == 404
-    
+    def test_create_user_success(self):
+        response: Response = self.client.post('/users/',json=self.data)
+        assert response.status_code == 200
+        json_response = response.json()
+        assert json_response.get('first_name') == self.first_name
+        assert json_response.get('last_name') == self.last_name
+        assert json_response.get('email') == self.email
+        assert json_response.get('id') is not None
+        for key in json_response.keys():
+            assert key in _VALID_USER_FIELDS
         
-def test_get_user_not_found(client):
-    response: Response = client.get(f'/users/user-doesnt-exist')
-    assert response.status_code == 404
         
-def test_login(client):
-    from app.users.models import User 
-    from app.auth.endpoints import get_password_hash
-    User.create_entity(first_name='Lazlo',last_name='Lozla',email='lazlo@lozla.com',password=get_password_hash('secret'))
-    headers = {"Content-Type": "application/x-www-form-urlencoded"}
-    data = {'username': 'lazlo@lozla.com','password':'secret'}
-    response: Response = client.post('/token',data=data,headers=headers)
-    assert response.status_code == 200
-    json_response = response.json()
-    access_token = json_response.get('access_token')
-    assert access_token is not None
-    assert json_response.get('token_type') == 'bearer'
-    for key in json_response.keys():
-        assert key in _VALID_LOGIN_FIELDS
+    def test_get_user(self):
+        response: Response = self.client.post('/users/',json=self.data)
+        response: Response = self.client.get(f'/users/{response.json().get("id")}')
+        assert response.status_code == 200
+        json_response = response.json()
+        assert json_response.get('first_name') == self.first_name
+        assert json_response.get('last_name') == self.last_name
+        assert json_response.get('email') == self.email
+        assert json_response.get('id') is not None
+        for key in json_response.keys():
+            assert key in _VALID_USER_FIELDS
+            
+    def test_update_user(self):
+        response: Response = self.client.post('/users/',json=self.data)
+        json_response = response.json()
+        id = json_response.get("id")
+        json_response['id']='invalid-id'
+        json_response['status']='invalid-status'
+        response: Response = self.client.put(f'/users/{id}',json=self.data)
+        assert response.status_code == 200
+        json_response = response.json()
+        assert json_response.get('first_name') == self.first_name
+        assert json_response.get('last_name') == self.last_name
+        assert json_response.get('email') == self.email
+        assert json_response.get('id') == id
+        for key in json_response.keys():
+            assert key in _VALID_USER_FIELDS
 
-    headers = {'Authorization':f'Bearer {access_token}'}
-    response: Response = client.get('/auth/users/me',headers=headers)
-    assert response.status_code == 200
-    json_response = response.json()
-    for key in json_response.keys():
-        assert key in _VALID_USER_FIELDS
+    def test_delete_user(self):
+        response: Response = self.client.post('/users/',json=self.data)
+        json_response = response.json()
+        id = json_response.get("id")
+        response: Response = self.client.delete(f'/users/{id}')
+        assert response.status_code == 200
+        response: Response = self.client.get(f'/users/{id}')
+        assert response.status_code == 404
+        
+            
+    def test_get_user_not_found(self,):
+        response: Response = self.client.get(f'/users/user-doesnt-exist')
+        assert response.status_code == 404
+            
+    def test_create_user_with_create_permission(self):
+        response: Response = self.client.post('/users/',json=self.data)
+        assert response.status_code == 200
+        
+        #json_response = response.json()
+        
+        
+        
+    def test_create_user_without_create_permission(self):...        
+    def test_update_user_with_update_permission(self):...        
+    def test_update_user_without_update_permission(self):...        
+
+    '''PERMISSION_TO_CREATE_ENTITY = 1 << 0
+    PERMISSION_TO_READ_ENTITY = 1 << 1
+    PERMISSION_TO_UPDATE_ENTITY = 1 << 2
+    PERMISSION_TO_DELETE_ENTITY = 1 << 3
+    PERMISSION_TO_LIST_ENTITIES = 1 << 4
+
+    PERMISSION_TO_CREATE_ENTITY_ON_BEHALF_OF_ANOTHER_USER = PERMISSION_TO_CREATE_ENTITY << 10
+    PERMISSION_TO_READ_ANOTHER_USER_S_ENTITY = PERMISSION_TO_READ_ENTITY << 10
+    PERMISSION_TO_UPDATE_ANOTHER_USER_S_ENTITY = PERMISSION_TO_UPDATE_ENTITY << 10
+    PERMISSION_TO_DELETE_ANOTHER_USER_S_ENTITY = PERMISSION_TO_DELETE_ENTITY << 10
+    PERMISSION_TO_LIST_OTHER_USERS_ENTITIES = PERMISSION_TO_LIST_ENTITIES << 10'''
+            
+            
+    '''def test_login(client):
+        from app.users.models import User 
+        from app.auth.endpoints import get_password_hash
+        User.create_entity(first_name='Lazlo',last_name='Lozla',email='lazlo@lozla.com',password=get_password_hash('secret'))
+        headers = {"Content-Type": "application/x-www-form-urlencoded"}
+        data = {'username': 'lazlo@lozla.com','password':'secret'}
+        response: Response = client.post('/token',data=data,headers=headers)
+        assert response.status_code == 200
+        json_response = response.json()
+        access_token = json_response.get('access_token')
+        assert access_token is not None
+        assert json_response.get('token_type') == 'bearer'
+        for key in json_response.keys():
+            assert key in _VALID_LOGIN_FIELDS
+
+        headers = {'Authorization':f'Bearer {access_token}'}
+        response: Response = client.get('/auth/users/me',headers=headers)
+        assert response.status_code == 200
+        json_response = response.json()
+        for key in json_response.keys():
+            assert key in _VALID_USER_FIELDS'''
         

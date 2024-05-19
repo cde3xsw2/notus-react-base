@@ -26,8 +26,10 @@ class BaseNdbModel(ndb.Model):
   def update_entity(cls,key,data,*kargs,**kwargs):
     try:
       e = cls.get_by_urlsafe(key)
+      if not e:
+        return
     except Exception:
-      return None
+      return
     for name, val in data.dict().items():
       setattr(e, name, val)
     with client.context():
