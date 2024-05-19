@@ -28,3 +28,4 @@ package-lock.json
 src/assets/styles/tailwind.css
 
 *.pyc
+datastore-data/WEB-INF/appengine-generated/local_db.bin

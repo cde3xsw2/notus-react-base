@@ -4,19 +4,18 @@ Primary API route endpoints
 """
 from google.cloud import ndb
 from app.commons.models import BaseNdbModel
-from enum import Enum
+from enum import IntEnum
 from google.cloud.ndb import msgprop
 
 
 
 client = ndb.Client()
 
-
-class UserStatus(Enum):
+class UserStatus(IntEnum):
   ACTIVATED = 0
   DISABLED = 1
-  DELETED = 3
-  EMAIL_VALIDATION_REQUIRED = 4
+  DELETED = 2
+  EMAIL_VALIDATION_REQUIRED = 3
 
 '''class HTTPError(BaseModel):
     " ""
@@ -53,21 +52,23 @@ class User(BaseNdbModel):
   first_name = ndb.StringProperty()
   last_name = ndb.StringProperty()
   email = ndb.StringProperty()
+  password = ndb.StringProperty()
   
   # Flags and timestamps
-  enabled = ndb.BooleanProperty(default=True)#####REMOVE
   insertion_date = ndb.DateTimeProperty(auto_now_add=True)
-  update_date = ndb.DateTimeProperty(auto_now=True,default=UserStatus.EMAIL_VALIDATION_REQUIRED)
+  update_date = ndb.DateTimeProperty(auto_now=True)
   
-  #status = ndb.StringProperty(default)
-  #status = msgprop.EnumProperty(UserStatus, required=False)
-  
+  status = ndb.IntegerProperty(required = True, choices=list(UserStatus),default=UserStatus.EMAIL_VALIDATION_REQUIRED)
 
   # Additional methods for user management can be added here
   @property
   def id(self):
     return self.key.urlsafe()
   
-  #@staticmethod
+  @property
+  def disabled(self):
+    return self.status == UserStatus.DISABLED
+    #return self.status == UserStatus.EMAIL_VALIDATION_REQUIRED
+  
   
   

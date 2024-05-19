@@ -6,8 +6,8 @@ from fastapi import HTTPException
 from google.cloud import ndb
 
 
-#from .schemas import UserOut,UserCreate,UserUpdate
-#from .models import User,UserStatus
+from app.users.schemas import UserOut,UserCreate,UserUpdate
+from app.users.models import User as UserInDB, User as User2
 
 from typing import Annotated, Union
 
@@ -17,6 +17,8 @@ from pydantic import BaseModel
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 
+
+client = ndb.Client()
 
 # Init FastAPI router for API endpoints
 auth_routes = APIRouter()
@@ -41,26 +43,9 @@ class Token(BaseModel):
     token_type: str
 
 class TokenData(BaseModel):
-    username: Union[str, None] = None
+    key_urlsafe: Union[str, None] = None
     
-    
 
-def fake_hash_password(password: str):
-    return "fakehashed" + password
-
-
-
-
-
-class User2(BaseModel):
-    username: str
-    email: Union[str, None] = None
-    full_name: Union[str, None] = None
-    disabled: Union[bool, None] = None
-
-
-class UserInDB(User2):
-    hashed_password: str
     
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
@@ -72,11 +57,11 @@ def verify_password(plain_password, hashed_password):
 def get_password_hash(password):
     return pwd_context.hash(password)
 
-def authenticate_user(fake_db, username: str, password: str):
-    user = get_user2(fake_db, username)
+def authenticate_user(username: str, password: str):
+    user = get_user( username)
     if not user:
         return False
-    if not verify_password(password, user.hashed_password):
+    if not verify_password(password, user.password):
         return False
     return user    
 
@@ -98,29 +83,33 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
     )
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        username: str = payload.get("sub")
-        if username is None:
+        key_urlsafe: str = payload.get("sub")
+        if key_urlsafe is None:
             raise credentials_exception
-        token_data = TokenData(username=username)
+        token_data = TokenData(key_urlsafe=key_urlsafe)
     except JWTError:
         raise credentials_exception
-    user = get_user2(fake_users_db, username=token_data.username)
+    #user = get_user2(fake_users_db, username=token_data.username)
+    user = get_user_by_urlsafe(key=token_data.key_urlsafe)
     if user is None:
         raise credentials_exception
     return user
 
 
-def get_user2(db, username: str):
-    if username in db:
-        user_dict = db[username]
-        return UserInDB(**user_dict)
-
-
-def fake_decode_token(token):
-    # This doesn't provide any security at all
-    # Check the next version
-    user = get_user2(fake_users_db, token)
-    return user
+def get_user_by_urlsafe(key:bytes):
+    from app.users.models import User
+    print('get_user_by_urlsafe')
+    print(key)
+    #print(str(key))
+    with client.context():
+        return ndb.Key(urlsafe=key).get()
+        #return ndb.Key(urlsafe=key.decode('ascii')).get()
+    
+def get_user(email: str):
+    from app.users.models import User
+    with client.context():
+        return User.query(User.email==email).get()
+    
 
 
 async def get_current_active_user(
@@ -134,7 +123,7 @@ async def get_current_active_user(
 async def login_for_access_token(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
 ) -> Token:
-    user = authenticate_user(fake_users_db, form_data.username, form_data.password)
+    user = authenticate_user(form_data.username, form_data.password)#fake_users_db, 
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -142,12 +131,13 @@ async def login_for_access_token(
             headers={"WWW-Authenticate": "Bearer"},
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    key_urlsafe = user.key.urlsafe().decode('ascii')
     access_token = create_access_token(
-        data={"sub": user.username}, expires_delta=access_token_expires
+        data={"sub": key_urlsafe}, expires_delta=access_token_expires
     )
     return Token(access_token=access_token, token_type="bearer")
 
-@auth_routes.get("/auth/users/me", )
+@auth_routes.get("/auth/users/me",response_model=UserOut )
 async def read_users_me(
     current_user: Annotated[User2, Depends(get_current_active_user)],
 ):

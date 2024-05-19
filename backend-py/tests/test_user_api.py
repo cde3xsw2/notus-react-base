@@ -8,12 +8,14 @@ from requests import Response
 
 from app.main import application
 #from app.users import 
-
+from google.cloud import ndb
 '''
 from fastapi.testclient import TestClient
 from your_app import app  # Replace with your app's import path
 
 '''
+
+clnt = ndb.Client()
 
 @pytest.fixture(scope='module', autouse=True)
 def client():
@@ -53,8 +55,11 @@ def test_get_user(client):
         assert key in _VALID_USER_FIELDS
         
 def test_login(client):
+    from app.users.models import User 
+    from app.auth.endpoints import get_password_hash
+    user = User.create(first_name='Lazlo',last_name='Lozla',email='lazlo@lozla.com',password=get_password_hash('secret'))
     headers = {"Content-Type": "application/x-www-form-urlencoded"}
-    data = {'username': 'johndoe','password':'secret'}
+    data = {'username': 'lazlo@lozla.com','password':'secret'}
     response: Response = client.post('/token',data=data,headers=headers)
     assert response.status_code == 200
     json_response = response.json()
@@ -63,13 +68,13 @@ def test_login(client):
     assert json_response.get('token_type') == 'bearer'
     for key in json_response.keys():
         assert key in _VALID_LOGIN_FIELDS
+
     headers = {'Authorization':f'Bearer {access_token}'}
     response: Response = client.get('/auth/users/me',headers=headers)
+    assert response.status_code == 200
     json_response = response.json()
-    print(response.json())
-    #for key in json_response.keys():
-    #    assert key in _VALID_USER_FIELDS
-    #response: Response = client.get('/users/me')
+    for key in json_response.keys():
+        assert key in _VALID_USER_FIELDS
     
-    #assert False
+    assert False
     
