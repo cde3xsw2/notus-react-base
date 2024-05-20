@@ -17,6 +17,8 @@ from pydantic import BaseModel
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from .schemas import UserDto
+from app.permissions.models import EntityPermission
+
 
 client = ndb.Client()
 
@@ -98,12 +100,11 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
 
 def get_user_by_urlsafe(key:bytes):
     from app.users.models import User
-    print('get_user_by_urlsafe')
-    print(key)
-    #print(str(key))
     with client.context():
-        return ndb.Key(urlsafe=key).get()
-        #return ndb.Key(urlsafe=key.decode('ascii')).get()
+        user = ndb.Key(urlsafe=key).get()
+        if not isinstance(user,User):
+            raise Exception()
+        return user
     
 def get_user(email: str):
     from app.users.models import User
@@ -118,13 +119,18 @@ async def get_current_active_user(
     if current_user.disabled:
         raise HTTPException(status_code=400, detail="Inactive user")
     with client.context():
-        return UserDto(id=current_user.id,
+        if current_user.roles:
+            permissions = EntityPermission.find_by_roles(roles=[current_user.roles[0]])
+            for permission in permissions:
+                print(permission.entity_name)
+                print(permission.permissions)
+        return UserDto(id=current_user.key.urlsafe(),
                         disabled=current_user.disabled,
                         email=current_user.email,
                         first_name=current_user.first_name,
                         insertion_date=current_user.insertion_date,
                         last_name=current_user.last_name,
-                        roles=current_user.roles,
+                        #roles=current_user.roles,
                         status=current_user.status,
                         update_date=current_user.update_date,
                         )

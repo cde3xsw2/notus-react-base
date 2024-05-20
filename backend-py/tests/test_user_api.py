@@ -12,7 +12,7 @@ from google.cloud import ndb
 from app.users.models import User 
 from app.auth.endpoints import get_password_hash
 from unittest.mock import patch  # Assuming you use unittest.mock for patching
-
+from app.permissions.models import BranchRole, EntityPermission,PERMISSION_CRUDL
 '''
 from fastapi.testclient import TestClient
 from your_app import app  # Replace with your app's import path
@@ -22,6 +22,8 @@ from your_app import app  # Replace with your app's import path
 '''@pytest.fixture(scope='module', autouse=True)
 def client():
 '''
+clnt = ndb.Client()
+
 
 _VALID_USER_FIELDS = ['first_name','last_name','email','id',]
 _VALID_LOGIN_FIELDS = ['access_token','token_type']
@@ -36,13 +38,23 @@ class TestUserApi:
         cls.email = "laslo.losla@chacarron.com"
         enabled = True
         cls.data = {"first_name": cls.first_name, "last_name": cls.last_name,"email":cls.email,"enabled":enabled}
-        User.create_entity(first_name='Lazlo',last_name='Lozla',email='lazlo@lozla.com',password=get_password_hash('secret'))
+        role = BranchRole.create_entity(name='Admin')
+        EntityPermission.create_entity(entity_name=User.__name__,role=role.key,permissions=PERMISSION_CRUDL)
+        roles=[role.key]
+        user = User.create_entity(first_name='Lazlo',last_name='Lozla',email='lazlo@lozla.com',password=get_password_hash('secret'),roles=roles)
         cls.headers = {"Content-Type": "application/x-www-form-urlencoded"}
         data = {'username': 'lazlo@lozla.com','password':'secret'}
         response: Response = cls.client.post('/token',data=data,headers=cls.headers)
         json_response = response.json()
         access_token = json_response.get('access_token')
         cls.login_headers = {'Authorization':f'Bearer {access_token}'}
+    
+    @classmethod
+    def teardown_class(cls):
+        with clnt.context():
+            ndb.delete_multi(User.query().fetch(keys_only=True)
+)
+
 
     def test_create_user_success(self):
         response: Response = self.client.post('/users/',json=self.data,headers=self.login_headers)
@@ -54,6 +66,7 @@ class TestUserApi:
         assert json_response.get('id') is not None
         for key in json_response.keys():
             assert key in _VALID_USER_FIELDS
+        assert False
         
         
     def test_get_user(self):

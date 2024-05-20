@@ -45,6 +45,6 @@ class UserDto(BaseModel):
   insertion_date : datetime = None
   update_date : datetime = None
   status:int
-  roles: List[str] = []
+  #roles: List[str] = []
   id:str
   disabled:bool

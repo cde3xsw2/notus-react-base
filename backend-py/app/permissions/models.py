@@ -1,6 +1,8 @@
 """
 Primary API route endpoints
 """
+from typing import List
+
 from google.cloud import ndb
 from app.commons.models import BaseNdbModel
 from app.users.models import BranchUser
@@ -79,19 +81,40 @@ PERMISSION_TO_UPDATE_ANOTHER_USER_S_ENTITY = PERMISSION_TO_UPDATE_ENTITY << 10
 PERMISSION_TO_DELETE_ANOTHER_USER_S_ENTITY = PERMISSION_TO_DELETE_ENTITY << 10
 PERMISSION_TO_LIST_OTHER_USERS_ENTITIES = PERMISSION_TO_LIST_ENTITIES << 10
 
+PERMISSION_CRUDL = PERMISSION_TO_CREATE_ENTITY | PERMISSION_TO_READ_ENTITY | PERMISSION_TO_UPDATE_ENTITY| PERMISSION_TO_DELETE_ENTITY | PERMISSION_TO_LIST_ENTITIES
+PERMISSION_CRUDL_ANOTHER = PERMISSION_TO_CREATE_ENTITY_ON_BEHALF_OF_ANOTHER_USER | PERMISSION_TO_READ_ANOTHER_USER_S_ENTITY | PERMISSION_TO_UPDATE_ANOTHER_USER_S_ENTITY | PERMISSION_TO_DELETE_ANOTHER_USER_S_ENTITY | PERMISSION_TO_LIST_OTHER_USERS_ENTITIES
 
-class EntityName(IntEnum):
+
+'''class EntityName(IntEnum):
   ACTIVATED = 0
   DISABLED = 1
   DELETED = 2
-  EMAIL_VALIDATION_REQUIRED = 3
+  EMAIL_VALIDATION_REQUIRED = 3'''
+
+class BranchRole(BaseNdbModel):
+    name = ndb.StringProperty()
   
-class EntityPermission(ndb.Model):
-  entity_name = ndb.IntegerProperty(required = True, choices=list(EntityName))
-  #user = BranchUser
-  #role = BranchRole
+class EntityPermission(BaseNdbModel):
+  #entity_name = ndb.IntegerProperty(required = True, choices=list(EntityName))
+  entity_name = ndb.StringProperty(required=True)
+  role = ndb.KeyProperty()
   #branch_permission = ndb.IntegerProperty()#An ndb.IntegerProperty in NDB stores 8 bytes.
-  permissions = ndb.IntegerProperty(indexed=False)
+  permissions = ndb.IntegerProperty()#indexed=False
+  
+  
+  #def find_by_roles(cls,roles)->List[EntityPermission]:
+  @classmethod
+  def find_by_roles(cls,roles)->List:
+      query = EntityPermission.query()
+      if roles:
+          r = query.filter(EntityPermission.role.IN(roles)).get()
+          if isinstance(r,EntityPermission):
+              return [r]
+          else:
+              return r
+      else:
+          return []
+      
   
 #TablePermission(role=BranchRole.ADMIN, CREATE_PERMISSION && READ_PERMISSION)
   
