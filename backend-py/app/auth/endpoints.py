@@ -16,7 +16,7 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel
 from jose import JWTError, jwt
 from passlib.context import CryptContext
-
+from .schemas import UserDto
 
 client = ndb.Client()
 
@@ -117,7 +117,18 @@ async def get_current_active_user(
 ):
     if current_user.disabled:
         raise HTTPException(status_code=400, detail="Inactive user")
-    return current_user    
+    with client.context():
+        return UserDto(id=current_user.id,
+                        disabled=current_user.disabled,
+                        email=current_user.email,
+                        first_name=current_user.first_name,
+                        insertion_date=current_user.insertion_date,
+                        last_name=current_user.last_name,
+                        roles=current_user.roles,
+                        status=current_user.status,
+                        update_date=current_user.update_date,
+                        )
+
 
 @auth_routes.post("/token")
 async def login_for_access_token(

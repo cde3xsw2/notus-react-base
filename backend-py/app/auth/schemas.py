@@ -2,7 +2,7 @@
 Primary API route endpoints
 
 """
-
+from typing import List
 from datetime import datetime
 from fastapi import Body
 
@@ -10,7 +10,6 @@ from fastapi import Body
 from typing import Optional
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from datetime import datetime
 from pydantic import BaseModel
 
 
@@ -37,3 +36,15 @@ class UserOut(UserBase):
   class Config:
     orm_mode = True
 '''
+
+
+class UserDto(BaseModel):
+  first_name: str
+  last_name: str
+  email: str
+  insertion_date : datetime = None
+  update_date : datetime = None
+  status:int
+  roles: List[str] = []
+  id:str
+  disabled:bool

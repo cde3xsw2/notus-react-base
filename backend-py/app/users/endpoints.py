@@ -17,17 +17,16 @@ from pydantic import BaseModel
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from app.auth.endpoints import get_current_active_user
-
+from app.auth.utils import CurrentUser
 
 # Init FastAPI router for API endpoints
 users_routes = APIRouter()
 client = ndb.Client()
 
 @users_routes.post("/users", response_model=UserOut)
-async def create_user(current_user: Annotated[User, Depends(get_current_active_user)],
+async def create_user(current_user: CurrentUser,
                       user: UserCreate):
-  with client.context():
-    print(current_user)
+  print(current_user)
   return User.create_entity(**user.dict())
 
 @users_routes.get("/users/{user_id}", response_model=UserOut,)
