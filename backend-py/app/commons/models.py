@@ -4,6 +4,12 @@ client = ndb.Client()
 
 class BaseNdbModel(ndb.Model):
   
+  
+  @classmethod
+  def ids_to_keys(cls,ids):
+    with client.context():
+      return [ndb.Key(cls,id) for id in ids]
+  
   @classmethod
   def get_by_urlsafe(cls,key):
     with client.context():

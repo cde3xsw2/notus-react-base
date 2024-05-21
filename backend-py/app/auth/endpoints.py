@@ -119,18 +119,13 @@ async def get_current_active_user(
     if current_user.disabled:
         raise HTTPException(status_code=400, detail="Inactive user")
     with client.context():
-        if current_user.roles:
-            permissions = EntityPermission.find_by_roles(roles=[current_user.roles[0]])
-            for permission in permissions:
-                print(permission.entity_name)
-                print(permission.permissions)
         return UserDto(id=current_user.key.urlsafe(),
                         disabled=current_user.disabled,
                         email=current_user.email,
                         first_name=current_user.first_name,
                         insertion_date=current_user.insertion_date,
                         last_name=current_user.last_name,
-                        #roles=current_user.roles,
+                        roles=[role.key.id() for role in ndb.get_multi(current_user.roles)],
                         status=current_user.status,
                         update_date=current_user.update_date,
                         )
