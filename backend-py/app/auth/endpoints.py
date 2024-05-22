@@ -6,7 +6,7 @@ from fastapi import HTTPException
 from google.cloud import ndb
 
 
-from app.users.schemas import UserOut,UserCreate,UserUpdate
+from app.users.schemas import UserOut, UserCreate, UserUpdate
 from app.users.models import User as UserInDB, User as User2
 
 from typing import Annotated, Union
@@ -40,17 +40,20 @@ fake_users_db = {
         "disabled": False,
     }
 }
+
+
 class Token(BaseModel):
     access_token: str
     token_type: str
 
+
 class TokenData(BaseModel):
     key_urlsafe: Union[str, None] = None
-    
 
-    
+
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
 
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
@@ -59,13 +62,15 @@ def verify_password(plain_password, hashed_password):
 def get_password_hash(password):
     return pwd_context.hash(password)
 
+
 def authenticate_user(username: str, password: str):
-    user = get_user( username)
+    user = get_user(username)
     if not user:
         return False
     if not verify_password(password, user.password):
         return False
-    return user    
+    return user
+
 
 def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None):
     to_encode = data.copy()
@@ -76,7 +81,8 @@ def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
-  
+
+
 async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -91,26 +97,28 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
         token_data = TokenData(key_urlsafe=key_urlsafe)
     except JWTError:
         raise credentials_exception
-    #user = get_user2(fake_users_db, username=token_data.username)
+    # user = get_user2(fake_users_db, username=token_data.username)
     user = get_user_by_urlsafe(key=token_data.key_urlsafe)
     if user is None:
         raise credentials_exception
     return user
 
 
-def get_user_by_urlsafe(key:bytes):
+def get_user_by_urlsafe(key: bytes):
     from app.users.models import User
+
     with client.context():
         user = ndb.Key(urlsafe=key).get()
-        if not isinstance(user,User):
+        if not isinstance(user, User):
             raise Exception()
         return user
-    
+
+
 def get_user(email: str):
     from app.users.models import User
+
     with client.context():
-        return User.query(User.email==email).get()
-    
+        return User.query(User.email == email).get()
 
 
 async def get_current_active_user(
@@ -119,23 +127,24 @@ async def get_current_active_user(
     if current_user.disabled:
         raise HTTPException(status_code=400, detail="Inactive user")
     with client.context():
-        return UserDto(id=current_user.key.urlsafe(),
-                        disabled=current_user.disabled,
-                        email=current_user.email,
-                        first_name=current_user.first_name,
-                        insertion_date=current_user.insertion_date,
-                        last_name=current_user.last_name,
-                        roles=[role.key.id() for role in ndb.get_multi(current_user.roles)],
-                        status=current_user.status,
-                        update_date=current_user.update_date,
-                        )
+        return UserDto(
+            id=current_user.key.urlsafe(),
+            disabled=current_user.disabled,
+            email=current_user.email,
+            first_name=current_user.first_name,
+            insertion_date=current_user.insertion_date,
+            last_name=current_user.last_name,
+            roles=[role.key.id() for role in ndb.get_multi(current_user.roles)],
+            status=current_user.status,
+            update_date=current_user.update_date,
+        )
 
 
 @auth_routes.post("/token")
 async def login_for_access_token(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
 ) -> Token:
-    user = authenticate_user(form_data.username, form_data.password)#fake_users_db, 
+    user = authenticate_user(form_data.username, form_data.password)  # fake_users_db,
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -143,20 +152,22 @@ async def login_for_access_token(
             headers={"WWW-Authenticate": "Bearer"},
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    key_urlsafe = user.key.urlsafe().decode('ascii')
+    key_urlsafe = user.key.urlsafe().decode("ascii")
     access_token = create_access_token(
         data={"sub": key_urlsafe}, expires_delta=access_token_expires
     )
     return Token(access_token=access_token, token_type="bearer")
 
-@auth_routes.get("/auth/users/me",response_model=UserOut )
+
+@auth_routes.get("/auth/users/me", response_model=UserOut)
 async def read_users_me(
     current_user: Annotated[User2, Depends(get_current_active_user)],
 ):
-    print('read_users_me...')
-    #print(current_user)
+    print("read_users_me...")
+    # print(current_user)
     return current_user
-  
+
+
 @auth_routes.get("/users/me/items/")
 async def read_own_items(
     current_user: Annotated[User2, Depends(get_current_active_user)],

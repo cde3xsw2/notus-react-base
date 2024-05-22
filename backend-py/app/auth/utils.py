@@ -8,5 +8,5 @@ from datetime import datetime
 from pydantic import BaseModel
 from .schemas import UserDto
 
-  
+
 CurrentUser = Annotated[UserDto, Depends(get_current_active_user)]

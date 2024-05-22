@@ -16,7 +16,7 @@ from pydantic import BaseModel
 
 from typing import Optional
 
-'''class UserBase(BaseModel):
+"""class UserBase(BaseModel):
   first_name: str
   last_name: str
   email: str
@@ -36,4 +36,4 @@ class UserOut(UserBase):
 
   class Config:
     orm_mode = True
-'''
+"""

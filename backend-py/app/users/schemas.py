@@ -16,23 +16,26 @@ from pydantic import BaseModel
 
 from typing import Optional
 
+
 class UserBase(BaseModel):
-  first_name: str
-  last_name: str
-  email: str
-  #enabled: Optional[bool] = True
+    first_name: str
+    last_name: str
+    email: str
+    # enabled: Optional[bool] = True
+
 
 class UserCreate(UserBase):
-  pass
+    pass
+
 
 class UserUpdate(UserBase):
-  enabled: Optional[bool]
+    enabled: Optional[bool]
+
 
 class UserOut(UserBase):
-  id: str
-  #insertion_date: datetime
-  #update_date: datetime
-  
+    id: str
+    # insertion_date: datetime
+    # update_date: datetime
 
-  class Config:
-    orm_mode = True
+    class Config:
+        orm_mode = True

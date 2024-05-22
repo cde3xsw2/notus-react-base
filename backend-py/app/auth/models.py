@@ -2,17 +2,17 @@
 Primary API route endpoints
 
 """
+
 from google.cloud import ndb
 from app.commons.models import BaseNdbModel
 from enum import Enum
 from google.cloud.ndb import msgprop
 
 
-
 client = ndb.Client()
 
 
-'''class UserStatus(Enum):
+"""class UserStatus(Enum):
   ACTIVATED = 0
   DISABLED = 1
   DELETED = 3
@@ -61,4 +61,4 @@ class User(BaseNdbModel):
   #@staticmethod
   
   
-'''
+"""

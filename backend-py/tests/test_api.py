@@ -2,7 +2,8 @@
 Tests for API handlers
 
 """
-'''import pytest
+
+"""import pytest
 from fastapi.testclient import TestClient
 from requests import Response
 
@@ -38,4 +39,4 @@ def test_hello_world(client):
     response: Response = client.get('/hello/world')
     parsed_data = response.json()
     assert response.status_code == 200
-    assert parsed_data.get('hello') == 'world' '''
+    assert parsed_data.get('hello') == 'world' """

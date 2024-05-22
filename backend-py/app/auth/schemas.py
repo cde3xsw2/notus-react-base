@@ -2,6 +2,7 @@
 Primary API route endpoints
 
 """
+
 from typing import List
 from datetime import datetime
 from fastapi import Body
@@ -14,7 +15,8 @@ from pydantic import BaseModel
 
 
 from typing import Optional
-'''
+
+"""
 class UserBase(BaseModel):
   first_name: str
   last_name: str
@@ -35,16 +37,16 @@ class UserOut(UserBase):
 
   class Config:
     orm_mode = True
-'''
+"""
 
 
 class UserDto(BaseModel):
-  first_name: str
-  last_name: str
-  email: str
-  insertion_date : datetime = None
-  update_date : datetime = None
-  status:int
-  roles: List = []
-  id:str
-  disabled:bool
+    first_name: str
+    last_name: str
+    email: str
+    insertion_date: datetime = None
+    update_date: datetime = None
+    status: int
+    roles: List = []
+    id: str
+    disabled: bool
