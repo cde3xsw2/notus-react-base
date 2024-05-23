@@ -1,7 +1,14 @@
 from google.cloud import ndb
+from enum import Enum
+import logging
 
 client = ndb.Client()
 
+class ErrorType(Enum):
+  DUPLICATED = "Entidad duplicada"
+  NO_ERROR = None
+  NOT_THE_OWNER = "No es el propietario"
+  NOT_FOUND = "Entidad no encontrada"
 
 class BaseNdbModel(ndb.Model):
 
@@ -12,17 +19,17 @@ class BaseNdbModel(ndb.Model):
 
     @classmethod
     def get_by_urlsafe(cls, key):
-        with client.context():
-            try:
-                e = ndb.Key(urlsafe=key).get()
-                if not isinstance(e, cls):
-                    raise Exception("")
-                return e
-            except Exception as err:
-                return
+        try:
+            e = ndb.Key(urlsafe=key).get()
+            if not isinstance(e, cls):
+                raise Exception("")
+            return e
+        except Exception as err:
+            logging.error(f'get_by_urlsafe {err}')
+            return
 
     @classmethod
-    def create_entity(cls, *kargs, **kwargs):
+    def create_entity(cls, **kwargs):
         with client.context():
             e = cls(**kwargs)
             e.put()
@@ -34,12 +41,13 @@ class BaseNdbModel(ndb.Model):
             e = cls.get_by_urlsafe(key)
             if not e:
                 return
-        except Exception:
+        except Exception as e:
+            logging.error(f'update_entity {e}')
+            
             return
         for name, val in data.dict().items():
             setattr(e, name, val)
-        with client.context():
-            e.put()
+        e.put()
         return e
 
     @classmethod
@@ -47,8 +55,11 @@ class BaseNdbModel(ndb.Model):
         try:
             e: ndb.Model = cls.get_by_urlsafe(key)
             if e:
-                with client.context():
-                    e.key.delete()
-                    return True
-        except Exception:
+                e.key.delete()
+                return True
+        except Exception as e:
+            logging.error(f'delete_entity {e}')
             return
+
+class DbException(Exception):...
+    

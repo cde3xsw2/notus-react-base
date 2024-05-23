@@ -128,7 +128,7 @@ async def get_current_active_user(
         raise HTTPException(status_code=400, detail="Inactive user")
     with client.context():
         return UserDto(
-            id=current_user.key.urlsafe(),
+            id=current_user.key.id(),
             disabled=current_user.disabled,
             email=current_user.email,
             first_name=current_user.first_name,
@@ -163,8 +163,6 @@ async def login_for_access_token(
 async def read_users_me(
     current_user: Annotated[User2, Depends(get_current_active_user)],
 ):
-    print("read_users_me...")
-    # print(current_user)
     return current_user
 
 

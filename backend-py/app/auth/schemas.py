@@ -41,6 +41,7 @@ class UserOut(UserBase):
 
 
 class UserDto(BaseModel):
+    id: int
     first_name: str
     last_name: str
     email: str
@@ -48,5 +49,4 @@ class UserDto(BaseModel):
     update_date: datetime = None
     status: int
     roles: List = []
-    id: str
     disabled: bool

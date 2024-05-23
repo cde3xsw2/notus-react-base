@@ -74,7 +74,7 @@ PERM_TO_UPDATE_ENTITY = 1 << 2
 PERM_TO_DELETE_ENTITY = 1 << 3
 PERM_TO_LIST_ENTITIES = 1 << 4
 
-PERM_TO_LIST_ENTITIES = PERM_TO_CREATE_ENTITY << 10
+PERM_TO_CREATE_ENTITY_ON_BEHALF_OF_ANOTHER_USER   = PERM_TO_CREATE_ENTITY << 10
 PERM_TO_READ_ANOTHER_USER_S_ENTITY = PERM_TO_READ_ENTITY << 10
 PERM_TO_UPDATE_ANOTHER_USER_S_ENTITY = PERM_TO_UPDATE_ENTITY << 10
 PERM_TO_DELETE_ANOTHER_USER_S_ENTITY = PERM_TO_DELETE_ENTITY << 10
@@ -88,7 +88,7 @@ PERM_CRUDL = (
     | PERM_TO_LIST_ENTITIES
 )
 PERM_CRUDL_ANOTHER = (
-    PERM_TO_LIST_ENTITIES
+    PERM_TO_CREATE_ENTITY_ON_BEHALF_OF_ANOTHER_USER
     | PERM_TO_READ_ANOTHER_USER_S_ENTITY
     | PERM_TO_UPDATE_ANOTHER_USER_S_ENTITY
     | PERM_TO_DELETE_ANOTHER_USER_S_ENTITY
@@ -164,25 +164,25 @@ class EntityPermission(BaseNdbModel):
         return cls.has_permissions(entitiesPermissions, PERM_TO_LIST_ENTITIES)
 
     @classmethod
-    def can_create(cls, entity: str, with_roles: List[dict]) -> bool:
+    def can_create(cls, entity: str, with_roles: List) -> bool:
         with client.context():
             perms = cls.find_by_roles(entity_name=entity, roles=with_roles)
             return cls._can_create(perms)
 
     @classmethod
-    def can_read(cls, entity: str, with_roles: List[dict]) -> bool:
+    def can_read(cls, entity: str, with_roles: List) -> bool:
         with client.context():
             perms = cls.find_by_roles(entity_name=entity, roles=with_roles)
             return cls._can_read(perms)
 
     @classmethod
-    def can_update(cls, entity: str, with_roles: List[dict]) -> bool:
+    def can_update(cls, entity: str, with_roles: List) -> bool:
         with client.context():
             perms = cls.find_by_roles(entity_name=entity, roles=with_roles)
             return cls._can_update(perms)
 
     @classmethod
-    def can_delete(cls, entity: str, with_roles: List[dict]) -> bool:
+    def can_delete(cls, entity: str, with_roles: List) -> bool:
         with client.context():
             perms = cls.find_by_roles(entity_name=entity, roles=with_roles)
             return cls._can_delete(perms)

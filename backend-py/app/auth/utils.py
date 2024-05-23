@@ -2,7 +2,6 @@ from typing import Annotated
 from typing import List
 
 from fastapi import Depends
-from app.users.models import User
 from .endpoints import get_current_active_user
 from datetime import datetime
 from pydantic import BaseModel

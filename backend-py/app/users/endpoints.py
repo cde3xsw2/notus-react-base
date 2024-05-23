@@ -19,6 +19,7 @@ from passlib.context import CryptContext
 from app.auth.endpoints import get_current_active_user
 from app.auth.utils import CurrentUser
 from app.permissions.models import EntityPermission
+from app.commons.models import ErrorType
 
 # Init FastAPI router for API endpoints
 users_routes = APIRouter()
@@ -36,7 +37,14 @@ async def create_user(current_user: CurrentUser, user: UserCreate):
     validate_perms(
         EntityPermission.can_create, entity="User", with_roles=current_user.roles
     )
-    return User.create_entity(**user.dict())
+    if not User.can_create_entity(current_user,**user.dict()):
+        raise HTTPException(status_code=400, detail="Duplicated user")
+            
+    created_user = User.create_entity(**user.dict())
+    with client.context():
+        created_user.updated_by=created_user.created_by=ndb.Key(User,current_user.id)
+        created_user.put()
+    return created_user
 
 
 @users_routes.get(
@@ -47,11 +55,11 @@ async def get_user(current_user: CurrentUser, user_id: str):
     validate_perms(
         EntityPermission.can_read, entity="User", with_roles=current_user.roles
     )
-
-    user = User.get_by_urlsafe(key=user_id)
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
-    return user
+    with client.context():
+        user = User.get_by_urlsafe(key=user_id)
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        return user
 
 
 @users_routes.put("/users/{user_id}", response_model=UserOut)
@@ -59,7 +67,12 @@ async def update_user(current_user: CurrentUser, user_id: str, user_data: UserUp
     validate_perms(
         EntityPermission.can_update, entity="User", with_roles=current_user.roles
     )
-    user = User.update_entity(key=user_id, data=user_data)  #
+    error_before_update = User.validate_before_update(current_user,user_id,**user_data.dict())
+    if error_before_update != ErrorType.NO_ERROR:
+        status_code,detail = error_before_update
+        raise HTTPException(status_code=status_code, detail=detail)
+    with client.context():
+        user = User.update_entity(key=user_id, data=user_data)  #
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     return user
@@ -70,7 +83,8 @@ async def delete_user(current_user: CurrentUser, user_id: str):
     validate_perms(
         EntityPermission.can_delete, entity="User", with_roles=current_user.roles
     )
-    user = User.delete_entity(user_id)
+    with client.context():
+        user = User.delete_entity(user_id)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     return {"message": "User deleted successfully"}

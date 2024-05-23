@@ -47,10 +47,6 @@ async def get_second(name: str = "world"):
     with client.context():
         ancestor_key = ndb.Key("Book", name or "*notitle*")
         greetings = Greeting.query_book(ancestor_key).fetch(20)
-        print(len(greetings))
-        if greetings:
-            print(vars(greetings[0]))
-            print("id " + str(greetings[0].key.id()))
     return dict(hello=name)
 
 
@@ -62,5 +58,5 @@ async def get_third(name: str = "world"):
             content="random content",  # request.form.get("content", None),
         )
         greeting.put()
-        # print(len(greetings))
+        # #print(len(greetings))
     return dict(hello=name)

@@ -21,11 +21,10 @@ class UserBase(BaseModel):
     first_name: str
     last_name: str
     email: str
-    # enabled: Optional[bool] = True
 
 
 class UserCreate(UserBase):
-    pass
+    password: str
 
 
 class UserUpdate(UserBase):
