@@ -4,11 +4,13 @@ import logging
 
 client = ndb.Client()
 
+
 class ErrorType(Enum):
-  DUPLICATED = "Entidad duplicada"
-  NO_ERROR = None
-  NOT_THE_OWNER = "No es el propietario"
-  NOT_FOUND = "Entidad no encontrada"
+    DUPLICATED = "Entidad duplicada"
+    NO_ERROR = None
+    NOT_THE_OWNER = "No es el propietario"
+    NOT_FOUND = "Entidad no encontrada"
+
 
 class BaseNdbModel(ndb.Model):
 
@@ -25,7 +27,7 @@ class BaseNdbModel(ndb.Model):
                 raise Exception("")
             return e
         except Exception as err:
-            logging.error(f'get_by_urlsafe {err}')
+            logging.error(f"get_by_urlsafe {err}")
             return
 
     @classmethod
@@ -42,8 +44,8 @@ class BaseNdbModel(ndb.Model):
             if not e:
                 return
         except Exception as e:
-            logging.error(f'update_entity {e}')
-            
+            logging.error(f"update_entity {e}")
+
             return
         for name, val in data.dict().items():
             setattr(e, name, val)
@@ -58,8 +60,8 @@ class BaseNdbModel(ndb.Model):
                 e.key.delete()
                 return True
         except Exception as e:
-            logging.error(f'delete_entity {e}')
+            logging.error(f"delete_entity {e}")
             return
 
-class DbException(Exception):...
-    
+
+class DbException(Exception): ...

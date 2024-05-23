@@ -37,12 +37,14 @@ async def create_user(current_user: CurrentUser, user: UserCreate):
     validate_perms(
         EntityPermission.can_create, entity="User", with_roles=current_user.roles
     )
-    if not User.can_create_entity(current_user,**user.dict()):
+    if not User.can_create_entity(current_user, **user.dict()):
         raise HTTPException(status_code=400, detail="Duplicated user")
-            
+
     created_user = User.create_entity(**user.dict())
     with client.context():
-        created_user.updated_by=created_user.created_by=ndb.Key(User,current_user.id)
+        created_user.updated_by = created_user.created_by = ndb.Key(
+            User, current_user.id
+        )
         created_user.put()
     return created_user
 
@@ -67,9 +69,11 @@ async def update_user(current_user: CurrentUser, user_id: str, user_data: UserUp
     validate_perms(
         EntityPermission.can_update, entity="User", with_roles=current_user.roles
     )
-    error_before_update = User.validate_before_update(current_user,user_id,**user_data.dict())
+    error_before_update = User.validate_before_update(
+        current_user, user_id, **user_data.dict()
+    )
     if error_before_update != ErrorType.NO_ERROR:
-        status_code,detail = error_before_update
+        status_code, detail = error_before_update
         raise HTTPException(status_code=status_code, detail=detail)
     with client.context():
         user = User.update_entity(key=user_id, data=user_data)  #
