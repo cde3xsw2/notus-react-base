@@ -3,6 +3,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
+import { motion, useScroll, useSpring } from "framer-motion";
+
 //import Footer from "components/Footers/Footer.js";
 
 const Header = () => {
@@ -189,7 +191,15 @@ const SubscriptionForm = () => {
 };
 
 function App() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
   return (
+    <>
+    <motion.div className="progress-bar" style={{ scaleX }} />
     <div className="App">
       <Header />
       <HeroSection />
@@ -197,6 +207,7 @@ function App() {
       <SubscriptionForm />
       <Footer />
     </div>
+    </>
   );
 }
 export default function Index() {

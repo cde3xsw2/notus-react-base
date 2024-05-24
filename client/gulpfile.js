@@ -9,16 +9,13 @@ gulp.task("licenses", async function () {
       gap.prependText(`/*!
 
 =========================================================
-* Notus React - v1.1.0 based on Tailwind Starter Kit by Creative Tim
+* P
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/notus-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/notus-react/blob/main/LICENSE.md)
+* Product Page: 
+* Copyright 2021 L
 
-* Tailwind Starter Kit Page: https://www.creative-tim.com/learning-lab/tailwind-starter-kit/presentation
-
-* Coded by Creative Tim
+* Coded by L
 
 =========================================================
 
@@ -35,16 +32,14 @@ gulp.task("licenses", async function () {
       gap.prependText(`<!--
 
 =========================================================
-* Notus React - v1.1.0 based on Tailwind Starter Kit by Creative Tim
+* P
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/notus-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/notus-react/blob/main/LICENSE.md)
+* Product Page: P
+* Copyright 2024 L
 
-* Tailwind Starter Kit Page: https://www.creative-tim.com/learning-lab/tailwind-starter-kit/presentation
 
-* Coded by Creative Tim
+* Coded by L
 
 =========================================================
 
@@ -61,16 +56,14 @@ gulp.task("licenses", async function () {
       gap.prependText(`/*!
 
 =========================================================
-* Notus React - v1.1.0 based on Tailwind Starter Kit by Creative Tim
+* P
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/notus-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/notus-react/blob/main/LICENSE.md)
+* Product Page: 
+* Copyright 2024 
 
-* Tailwind Starter Kit Page: https://www.creative-tim.com/learning-lab/tailwind-starter-kit/presentation
 
-* Coded by Creative Tim
+* Coded by Creative L
 
 =========================================================
 

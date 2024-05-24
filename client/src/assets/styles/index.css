@@ -8,6 +8,16 @@
 
 
 @layer components {
+    .progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 10px;
+        background: deeppink;
+        transform-origin: 0%;
+        z-index: 2;
+      }
     .hero-section-bg-f{
         background: #581C87;
         background: -webkit-linear-gradient(45deg, #A855F7 0%, #581C87 100%);
