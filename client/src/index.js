@@ -17,7 +17,9 @@ import Profile from "views/Profile.js";
 import Clean from "views/Clean.js";
 import Table from "views/Table.js";
 import Crud from "views/Crud.js";
-import Index from "views/Index.js";
+import IndexPechna from "views/IndexPechna.js";
+import IndexNoticiasIA from "views/IndexNoticiaIA.js";
+import MainIndex from "views/Index.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -31,7 +33,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Route path="/clean" exact component={Clean} />
       <Route path="/table" exact component={Table} />
       <Route path="/crud" exact component={Crud} />
-      <Route path="/" exact component={Index} />
+      <Route path="/index-1" exact component={IndexPechna} />
+      <Route path="/index-2" exact component={IndexNoticiasIA} />
+      <Route path="/" exact component={MainIndex} />
       {/* add redirect for first page */}
       <Redirect from="*" to="/" />
     </Switch>

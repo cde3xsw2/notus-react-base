@@ -5,3 +5,94 @@
 @tailwind utilities;
 
 @tailwind variants;
+
+
+@layer components {
+    .hero-section-bg-f{
+        background: #581C87;
+        background: -webkit-linear-gradient(45deg, #A855F7 0%, #581C87 100%);
+        background: linear-gradient(45deg, #A855F7 0%, #581C87 100%);
+    }
+    .hero-section-bg-e{
+        background: #581C87;
+        background: -webkit-linear-gradient(270deg, #581C87 0%, #A855F7 100%);
+        background: linear-gradient(270deg, #581C87 0%, #A855F7 100%);
+    }
+    .hero-section-bg-d{
+        background: #581C87;
+        background: -webkit-linear-gradient(270deg, #581C87 20%, #C084FC 100%);
+        background: linear-gradient(270deg, #581C87 20%, #C084FC 100%);
+    }
+    .hero-section-bg-c{
+        background: #6b21a8;
+        background: -webkit-linear-gradient(0deg, #6b21a8 0%, #e9d5ff 100%);
+        background: linear-gradient(0deg, #6b21a8 0%, #e9d5ff 100%);
+    }
+    .hero-section-bg-b{
+        background: #6b21a8;
+        background: -webkit-linear-gradient(0deg, #6b21a8 0%, #a855f7 100%);
+        background: linear-gradient(0deg, #6b21a8 0%, #a855f7 100%);
+    }
+    .hero-section-bg-a{
+        background: #6b21a8;
+        background: -webkit-linear-gradient(154deg, #6b21a8 0%, #a855f7 100%);
+        background: linear-gradient(154deg, #6b21a8 0%, #a855f7 100%);
+    }
+    .hero-section-bg-9{
+        background: #6b21a8;
+        background: -webkit-linear-gradient(154deg, #6b21a8 0%, #9333ea 100%);
+        background: linear-gradient(154deg, #6b21a8 0%, #9333ea 100%);
+    }
+    .hero-section-bg-8{
+        background: #6b21a8;
+        background: -webkit-linear-gradient(154deg, #6b21a8 0%, #7e22ce 100%);
+        background: linear-gradient(154deg, #6b21a8 0%, #7e22ce 100%);
+    }
+    .hero-section-bg-7{
+        background: #6b21a8;
+        background: -webkit-linear-gradient(154deg, #6b21a8 0%, #7070ff 100%);
+        background: linear-gradient(154deg, #6b21a8 0%, #7070ff 100%);
+    }
+    .hero-section-bg-6{
+        background: #0004ff;
+        background: -webkit-linear-gradient(154deg, #0004ff 0%, #7070ff 100%);
+        background: linear-gradient(154deg, #0004ff 0%, #7070ff 100%);
+    }
+    .hero-section-bg-5{
+        background: #474bff;
+        background: -webkit-linear-gradient(154deg, #474bff 0%, #9ea0f9 100%);
+        background: linear-gradient(154deg, #474bff 0%, #9ea0f9 100%);
+    }
+    .hero-section-bg-4{
+        background: #474bff;
+        background: -webkit-linear-gradient(208deg, #474bff 0%, #8e90fb 100%);
+        background: linear-gradient(208deg, #474bff 0%, #8e90fb 100%);
+    }
+    .hero-section-bg-3{
+        background: linear-gradient(135deg, #4f7fe3 25%, transparent 25%) -32px 0/ 64px 64px, linear-gradient(225deg, rgba(79,127,227,0.5) 25%, transparent 25%) -32px 0/ 64px 64px, linear-gradient(315deg, #4f7fe3 25%, transparent 25%) 0 0/ 64px 64px, linear-gradient(45deg, rgba(79,127,227,0.5) 25%, #d0d9dc 25%) 0 0/ 64px 64px;
+        background-color: #d0d9dc;
+    }
+    .hero-section-bg-2{
+        background: radial-gradient(at bottom right, #4fe3de 0, #4fe3de 8px, rgba(79,227,222,0.2) 8px, rgba(79,227,222,0.2) 16px, rgba(79,227,222,0.75) 16px, rgba(79,227,222,0.75) 24px, rgba(79,227,222,0.25) 24px, rgba(79,227,222,0.25) 32px, rgba(79,227,222,0.3) 32px, rgba(79,227,222,0.3) 40px, rgba(79,227,222,0.75) 40px, rgba(79,227,222,0.75) 48px, rgba(79,227,222,0.2) 48px, rgba(79,227,222,0.2) 56px, transparent 56px, transparent 64px), radial-gradient(at top left, transparent 0, transparent 8px, rgba(79,227,222,0.2) 8px, rgba(79,227,222,0.2) 16px, rgba(79,227,222,0.75) 16px, rgba(79,227,222,0.75) 24px, rgba(79,227,222,0.3) 24px, rgba(79,227,222,0.3) 32px, rgba(79,227,222,0.25) 32px, rgba(79,227,222,0.25) 40px, rgba(79,227,222,0.75) 40px, rgba(79,227,222,0.75) 48px, rgba(79,227,222,0.2) 48px, rgba(79,227,222,0.2) 56px, #4fe3de 56px, #4fe3de 64px, transparent 64px, transparent 160px);
+        background-blend-mode: multiply;
+        background-size: 64px 64px, 64px 64px;
+        background-color: #4ebbdc;
+    }
+    .hero-section-bg-1-2{
+        background: repeating-linear-gradient(      to right,      #057 0%,      #0fe 20px,      transparent 5px,      transparent 20px  )
+
+    }
+    .hero-section-bg-1-1{
+        background: repeating-linear-gradient(      to right,      #057 0%,      #0ae 20px,      transparent 5px,      transparent 20px  )
+        
+
+    }
+    .hero-section-bg-1 {
+        background:repeating-linear-gradient(      to right,      #007 0%,      #0ae 20px,      transparent 5px,      transparent 20px  )
+        
+    }
+    .hero-section-bg-0 {
+        background-image: url('https://norihost.com/wp-content/uploads/2019/06/clouds-19.jpg'); /* Replace with your image path */
+        clip-path: polygon(15% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0% 85%, 0% 15%);
+      }
+}
