@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 
-const newLocal = "Notus Reacta - A beautiful extension for Tailwind CSS.";
+const newLocal = "Base Project - A beautiful extension for Tailwind CSS.";
 const newLocal_1 = `. It features multiple HTML elements and it comes with dynamic
                 components for ReactJS, Vue and Angular.`;
 const newLocal_2 = "Get started";
@@ -15,7 +15,7 @@ const newLocal_4 = `Putting together a page has never been easier than matching
                     presentation to login areas, you can easily customise and
                     built your pages.`;
 const newLocal_5 = "CSS Components";
-const newLocal_6 = `Notus React comes with a huge number of Fully Coded CSS
+const newLocal_6 = `Base Project comes with a huge number of Fully Coded CSS
                         components.`;
 const newLocal_7 = "JavaScript Components";
 const newLocal_8 = `We also feature many dynamic components for React,
@@ -24,7 +24,7 @@ const newLocal_9 = `This extension also comes with 3 sample pages. They are
                         fully coded so you can start working instantly.`;
 const newLocal_10 = "Documentation";
 const newLocal_11 = `Built by developers for developers. You will love how
-                        easy is to to work with Notus React.`;
+                        easy is to to work with Base Project.`;
 const newLocal_12 = "CSS Components";
 const newLocal_13 = `Every element that you need in a product comes built in as a
                 component. All components fit perfectly with each other and can
@@ -67,7 +67,7 @@ const newLocal_43 = "Built by Developers for Developers";
 const newLocal_44 = "Carefully crafted code for Components";
 const newLocal_45 = "Dynamic Javascript Components";
 const newLocal_46 = `Beautiful Example Pages`;
-const newLocal_47 = `Notus React is a completly new product built using our past
+const newLocal_47 = `Base Project is a completly new product built using our past
               experience in web templates. Take the examples we made for you and
               start playing with them.`;
 const newLocal_48 = "Login Page";
@@ -694,7 +694,7 @@ function HeaderSection() {
             {newLocal}
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-blueGray-500">
-            {`Notus React is Free and Open Source. It does not change any of
+            {`Base Project is Free and Open Source. It does not change any of
                 the CSS from`}{" "}
             <a
               href="https://tailwindcss.com/?ref=creativetim"

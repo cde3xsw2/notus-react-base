@@ -1,7 +1,7 @@
 {
   "name": "notus-react",
   "version": "1.1.0",
-  "description": "Notus React - A free Tailwind CSS and React UI Kit and Admin by Creative Tim.",
+  "description": "Base project - A base project.",
   "repository": "https://github.com/creativetimofficial/notus-react",
   "license": "MIT",
   "dependencies": {
@@ -10,7 +10,8 @@
     "@fortawesome/fontawesome-free": "5.15.4",
     "framer-motion":"11.2.6",
     "@hookform/resolvers": "^3.3.4",
-    "@mui/material": "^5.15.15",
+    "@mui/icons-material":"^5.15.19",
+    "@mui/material": "^5.15.19",
     "@popperjs/core": "2.11.8",
     "@tailwindcss/forms": "0.5.7",
     "autoprefixer": "10.2.5",

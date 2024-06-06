@@ -19,6 +19,7 @@ import Table from "views/Table.js";
 import Crud from "views/Crud.js";
 import IndexPechna from "views/IndexPechna.js";
 import IndexNoticiasIA from "views/IndexNoticiaIA.js";
+import IndexTable from "views/IndexTable.js";
 import MainIndex from "views/Index.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -35,6 +36,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Route path="/crud" exact component={Crud} />
       <Route path="/index-1" exact component={IndexPechna} />
       <Route path="/index-2" exact component={IndexNoticiasIA} />
+      <Route path="/table-example" exact component={IndexTable} />
       <Route path="/" exact component={MainIndex} />
       {/* add redirect for first page */}
       <Redirect from="*" to="/" />

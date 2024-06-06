@@ -18,6 +18,7 @@ export default function Index() {
         <ul>
           <li><Link to="/index-1">Pechna</Link></li>
           <li><Link to="/index-2">Noticia IA</Link></li>
+          <li><Link to="/table-example">Table Example</Link></li>
 
         </ul>
       </div>

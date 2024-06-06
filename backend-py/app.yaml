@@ -5,6 +5,11 @@
 # Recommended to set to Python 3.7 runtime or later
 runtime: python38
 
+#default_expiration: "4d 5h"
+
+default_expiration: "1d 2h"
+
+
 env: standard  # Designate the flexible environment
 
 
